@@ -10,6 +10,7 @@ import HomePage from "./pages/home-page";
 import WorksPage from "./pages/works-page";
 
 import { GoogleAnalytics } from "./components/analytics/google-analytics";
+import { SEO } from "./components/seo/seo";
 import { AboutSection } from "./features/about";
 
 function AppRoutes() {
@@ -32,6 +33,7 @@ function AppRoutes() {
 
   return (
     <>
+      <SEO />
       <GoogleAnalytics />
       <Routes location={currentRouteLocation}>
         <Route element={<MainLayout />}>

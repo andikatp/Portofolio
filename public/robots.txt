@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Host
+Host: https://andikatp.my.id
+
+# Sitemaps
+Sitemap: https://andikatp.my.id/sitemap.xml
