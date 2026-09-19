@@ -16,7 +16,7 @@ import {
 } from "./";
 
 function WorkSection() {
-  const { works } = useWorks();
+  const { works, isLoading } = useWorks();
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const { setIsModalOpen: setGlobalModalOpen } = useModal();
@@ -103,6 +103,7 @@ function WorkSection() {
         <div className="mt-auto">
           <WorkMarquee
             works={works}
+            isLoading={isLoading}
             onHoverWork={handleHoverWork}
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
