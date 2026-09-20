@@ -19,7 +19,8 @@ export function AboutAdditionals() {
                       className="inline-flex items-center gap-1 hover:text-slate-900 break-all text-[9px] sm:text-xs leading-tight cursor-pointer"
                       href={link.href}
                       target={link.isExternal ? "_blank" : undefined}
-                      rel={link.isExternal ? "noreferrer" : undefined}
+                      rel={link.isExternal ? "noopener noreferrer" : undefined}
+                      aria-label={link.label}
                     >
                       <span>{link.label}</span>
                       <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 shrink-0" />

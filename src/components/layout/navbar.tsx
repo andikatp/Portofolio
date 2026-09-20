@@ -15,9 +15,9 @@ function Navbar() {
   const isHome = currentPath === "/" || currentPath === "/about";
 
   const menus = [
-    { label: "About", path: "/about" },
     { label: "Works", path: "/works" },
     { label: "Contact", path: "/contact" },
+    { label: "About", path: "/about" },
   ];
   const handleNavClick = (e: React.MouseEvent, path: string) => {
     e.preventDefault();

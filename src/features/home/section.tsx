@@ -14,7 +14,7 @@ import {
 
 const TITLE_TEXT = "I'm Andika Tri Prasetya.";
 const SUBTITLE_TEXT =
-  "I'm a fullstack developer who loves to build cool stuff. Available for work.";
+  "I'm a Flutter & Fullstack developer who loves to build cool stuff. Available for work.";
 
 export function HomeSection() {
   const { works } = useWorks();
@@ -87,14 +87,14 @@ export function HomeSection() {
       </div>
 
       <div className="flex flex-col w-full md:w-1/3 md:pl-8 lg:pl-16 space-y-1 sm:space-y-2.5">
-        <motion.h1
+        <motion.h2
           variants={projectsHeaderVariants}
           initial="hidden"
           animate={animateState}
-          className="text-[10px] sm:text-xs font-semibold text-gray-400 select-none lg:text-sm tracking-wider uppercase"
+          className="text-[10px] sm:text-xs font-semibold text-slate-500 select-none lg:text-sm tracking-wider uppercase"
         >
           CURRENT PROJECTS
-        </motion.h1>
+        </motion.h2>
         <div className="flex flex-col">
           {topProjects.map((project, index) => {
             const slug = getWorkSlug(project, works);
@@ -104,6 +104,7 @@ export function HomeSection() {
               <motion.a
                 key={project.id}
                 href={path}
+                aria-label={`View project details for ${project.title}`}
                 onClick={(e) => handleNavClick(e, path)}
                 variants={projectItemVariants}
                 custom={index}
@@ -124,6 +125,7 @@ export function HomeSection() {
 
           <motion.a
             href="/works"
+            aria-label="View all projects"
             onClick={(e) => handleNavClick(e, "/works")}
             variants={projectItemVariants}
             custom={topProjects.length}

@@ -71,7 +71,8 @@ export function AboutCV({ customIndex = 1 }: { customIndex?: number }) {
           href={cvUrl}
           download="Andika_Tri_Prasetya_CV.pdf"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
+          aria-label="Download Curriculum Vitae PDF"
           onClick={() =>
             trackEvent("download_cv", {
               file_url: cvUrl,

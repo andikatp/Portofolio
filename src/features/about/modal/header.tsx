@@ -29,7 +29,7 @@ export function AboutHeader({ onClose, customIndex = 0 }: AboutHeaderProps) {
             Andika Tri Prasetya
           </h3>
           <p className="text-xs text-slate-400 font-normal tracking-wide mt-0.5">
-            Fullstack Developer
+            Flutter & Fullstack Developer
           </p>
         </div>
       </div>

@@ -71,7 +71,8 @@ function ContactSection() {
               <a
                 href={item.link}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
+                aria-label={`Contact via ${item.label}`}
                 onClick={() =>
                   trackEvent("click_contact_link", {
                     label: item.label,

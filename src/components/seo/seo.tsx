@@ -7,24 +7,24 @@ const BASE_URL = "https://andikatp.my.id";
 
 const ROUTE_SEO: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "AndikaTp — Fullstack Developer",
+    title: "AndikaTp — Flutter & Fullstack Developer",
     description:
-      "Portfolio of Andika Tri Prasetya, a Fullstack Developer building high quality web applications with modern design and rich user experiences.",
+      "Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer specializing in cross-platform mobile applications (Flutter, React Native) and modern web systems.",
   },
   "/works": {
     title: "Works & Projects — AndikaTp",
     description:
-      "Explore selected web development projects, fullstack applications, and case studies built by Andika Tri Prasetya.",
+      "Explore selected Flutter & React Native mobile applications, fullstack web projects, and case studies built by Andika Tri Prasetya.",
   },
   "/about": {
     title: "About Me — AndikaTp",
     description:
-      "Learn more about Andika Tri Prasetya, Fullstack Developer background, technical skills, experiences, and qualifications.",
+      "Learn more about Andika Tri Prasetya, Flutter & Fullstack Developer background, technical skills, experiences, and qualifications.",
   },
   "/contact": {
     title: "Contact & Get in Touch — AndikaTp",
     description:
-      "Connect with Andika Tri Prasetya for software engineering opportunities, collaborations, or inquiries.",
+      "Connect with Andika Tri Prasetya for Flutter, mobile development, and fullstack software engineering opportunities.",
   },
 };
 
@@ -46,20 +46,20 @@ export const SEO = () => {
             title: `${work.title} — AndikaTp`,
             description:
               work.description ||
-              "Portfolio of Andika Tri Prasetya, a Fullstack Developer building high quality web applications.",
+              "Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer building high quality mobile and web applications.",
           };
         } else {
           config = {
             title: "Project Details — AndikaTp",
             description:
-              "Portfolio of Andika Tri Prasetya, a Fullstack Developer building high quality web applications.",
+              "Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer building high quality mobile and web applications.",
           };
         }
       } else {
         config = {
-          title: "AndikaTp — Fullstack Developer",
+          title: "AndikaTp — Flutter & Fullstack Developer",
           description:
-            "Portfolio of Andika Tri Prasetya, a Fullstack Developer building high quality web applications.",
+            "Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer building high quality mobile and web applications.",
         };
       }
     }
