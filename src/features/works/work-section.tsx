@@ -8,7 +8,7 @@ import {
   getWorkSlug,
   useWorks,
   WorkCursor,
-  WorkDetailModal,
+  WorkDetailOverlay,
   WorkHeader,
   WorkInfoPanel,
   WorkMarquee,
@@ -120,7 +120,7 @@ function WorkSection() {
           y={cursorY}
         />
 
-        <WorkDetailModal
+        <WorkDetailOverlay
           isOpen={isModalOpen}
           selectedWork={selectedWork}
           selectedLayoutId={selectedLayoutId}

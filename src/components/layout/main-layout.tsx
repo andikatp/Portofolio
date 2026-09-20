@@ -11,19 +11,15 @@ export default function MainLayout() {
 
   return (
     <div
-      className={`flex flex-col relative w-full ${
+      className={`flex flex-col relative w-full min-h-dvh ${
         isWorkDetail
-          ? "min-h-dvh overflow-y-auto"
-          : "h-dvh max-h-dvh overflow-hidden"
+          ? "overflow-y-auto"
+          : "overflow-y-auto md:h-dvh md:max-h-dvh"
       }`}
     >
       <Navbar />
       <PageTransition />
-      <main
-        className={`flex flex-col flex-1 min-h-0 ${
-          isWorkDetail ? "" : "overflow-hidden"
-        }`}
-      >
+      <main className="flex flex-col flex-1 min-h-0">
         {outlet}
       </main>
     </div>

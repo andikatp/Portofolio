@@ -30,7 +30,7 @@ function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="relative z-50 top-0 left-0 right-0 flex flex-row items-start sm:items-center justify-between px-4 sm:px-8 md:px-16 py-4 sm:py-6"
+      className="relative z-50 top-0 left-0 right-0 flex flex-row items-start sm:items-center justify-between px-4 sm:px-8 md:px-16 py-3 sm:py-6 short-compact-py"
     >
       {/* Left side: Logo or Back icon */}
       <div className="pointer-events-auto">

@@ -5,14 +5,16 @@ export * from "./animations/work-animations";
 export * from "./services/work-service";
 export * from "./hooks/use-works";
 
-export * from "./detail/work-detail-gallery";
-export * from "./detail/work-detail-info";
-export * from "./detail/work-detail-modal";
-export * from "./detail/work-detail-selector";
-export * from "./detail/work-detail-viewer";
-export * from "./detail/work-detail-view";
+export * from "./detail/overlay";
+export * from "./detail/view";
+export * from "./detail/components/info";
+export * from "./detail/components/gallery";
+export * from "./detail/components/image-viewer";
+export * from "./detail/components/selector";
 
-export * from "./marquee/work-cursor";
-export * from "./marquee/work-header";
-export * from "./marquee/work-info-panel";
-export * from "./marquee/work-marquee";
+export * from "./header/header";
+export * from "./cursor/cursor";
+export * from "./info-panel/info-panel";
+export * from "./marquee/marquee";
+export * from "./marquee/marquee-card";
+export * from "./marquee/marquee-skeleton";

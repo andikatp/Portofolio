@@ -1,20 +1,17 @@
-export { default as AboutSection } from "./about-section";
-export { default as AboutMarquee } from "./about-marquee";
+export { default as AboutSection } from "./section";
+export { default as AboutMarquee } from "./marquee/marquee";
 
-export * from "./data/about-data";
+export * from "./data/data";
 export * from "./data/experience-data";
-export * from "./data/about-additionals-data";
+export * from "./data/additionals-data";
 
-export * from "./animations/about-animations";
+export * from "./animations/animations";
 
-export * from "./modal/about-backdrop";
-export * from "./modal/about-curve";
-export * from "./modal/about-header";
+export * from "./modal/backdrop";
+export * from "./modal/curve";
+export * from "./modal/header";
 
-export { default as AboutAdditionals } from "./tabs/about-additionals";
-export * from "./tabs/about-intro";
-export * from "./tabs/about-story";
-export * from "./tabs/about-summary";
-export * from "./tabs/about-cv-tab";
-export * from "./tabs/about-experience-tab";
-export * from "./tabs/about-skill-matrix";
+export * from "./tabs/about-tab";
+export * from "./tabs/experience-tab";
+export * from "./tabs/cv-tab";
+export { default as AboutAdditionals } from "./tabs/components/additionals";

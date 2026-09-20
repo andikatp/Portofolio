@@ -80,17 +80,14 @@ export const PROJECT_SELECTOR_VARIANTS: Variants = {
 export const MARQUEE_CARD_VARIANTS: Variants = {
   rest: {
     scale: 1,
-    opacity: 0.7,
     filter: "grayscale(100%)",
   },
   hover: {
     scale: 1.05,
-    opacity: 1,
     filter: "grayscale(0%)",
   },
   selected: {
     scale: 1,
-    opacity: 1,
     filter: "grayscale(0%)",
   },
 };

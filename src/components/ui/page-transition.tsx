@@ -24,11 +24,10 @@ export default function PageTransition() {
 
   const w = dimensions.width || 1440;
   const h = dimensions.height || 900;
-  // Gentle, non-harsh 'u' curve height inspired by hirotos.com style
+
   const rawArch = w < 640 ? Math.round(w * 0.12) : Math.round(w * 0.1);
   const archHeight = Math.min(Math.max(rawArch, 40), 160);
 
-  // U-shaped scoop curve at top edge: sags downward in center instead of arching up
   const archPath = `M 0 0 Q ${w / 2} ${archHeight * 1.5} ${w} 0 L ${w} ${h + archHeight * 2} L 0 ${h + archHeight * 2} Z`;
 
   const EASE = [0.76, 0, 0.24, 1] as const;
