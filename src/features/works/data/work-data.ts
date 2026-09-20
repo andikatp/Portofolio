@@ -15,54 +15,9 @@ export interface WorkItem {
   order?: number;
 }
 
-export const WORKS: WorkItem[] = [
-  {
-    id: 1,
-    slug: "hrm-ess",
-    title: "HRM ESS",
-    category: "MOBILE APP / FLUTTER",
-    image: "https://images.ctfassets.net/aefzh7reb8zp/3rR215F0T34v82S2VbO73k/81c817df0e78280145c26dbf58aa89c6/thumb1.jpg",
-    images: ["https://images.ctfassets.net/aefzh7reb8zp/3rR215F0T34v82S2VbO73k/81c817df0e78280145c26dbf58aa89c6/thumb1.jpg"],
-    description: "Enterprise Human Resource Management and Employee Self-Service platform with AI face authentication.",
-    techstacks: ["FLUTTER", "NODEJS"],
-    role: "Mobile Developer",
-  },
-  {
-    id: 2,
-    slug: "dg-sales-app",
-    title: "DG Sales App",
-    category: "MOBILE APP / REACT NATIVE",
-    image: "https://images.ctfassets.net/aefzh7reb8zp/3rR215F0T34v82S2VbO73k/81c817df0e78280145c26dbf58aa89c6/thumb1.jpg",
-    images: [],
-    description: "Cross-platform enterprise sales & distribution management app.",
-    techstacks: ["REACT NATIVE", "NODEJS"],
-    role: "Mobile Developer",
-  },
-  {
-    id: 3,
-    slug: "my-sinar-jaya",
-    title: "My Sinar Jaya",
-    category: "MOBILE APP / FLUTTER",
-    image: "https://images.ctfassets.net/aefzh7reb8zp/3rR215F0T34v82S2VbO73k/81c817df0e78280145c26dbf58aa89c6/thumb1.jpg",
-    images: [],
-    description: "Ticketing & booking application for transportation operations.",
-    techstacks: ["FLUTTER", "NODEJS"],
-    role: "Mobile Developer",
-  },
-  {
-    id: 4,
-    slug: "mootasi",
-    title: "Mootasi",
-    category: "FULLSTACK WEB / REACT",
-    image: "https://images.ctfassets.net/aefzh7reb8zp/3rR215F0T34v82S2VbO73k/81c817df0e78280145c26dbf58aa89c6/thumb1.jpg",
-    images: [],
-    description: "Financial transaction mutation tracker and analytical dashboard.",
-    techstacks: ["REACT", "NODEJS"],
-    role: "Fullstack Developer",
-  },
-];
+export const WORKS: WorkItem[] = [];
 
-export const DUPLICATED_WORKS: WorkItem[] = [...WORKS, ...WORKS, ...WORKS, ...WORKS, ...WORKS, ...WORKS];
+export const DUPLICATED_WORKS: WorkItem[] = [];
 
 export function getWorkSlug(work: WorkItem, worksList: WorkItem[] = WORKS): string {
   if (work.slug) return work.slug;

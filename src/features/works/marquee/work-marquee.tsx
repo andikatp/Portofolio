@@ -286,7 +286,7 @@ export function WorkMarquee({
       className={`w-full my-auto py-4 relative touch-pan-y ${
         selectedLayoutId || isPausedProp
           ? "overflow-visible"
-          : "overflow-hidden"
+          : "overflow-x-clip"
       }`}
       onMouseMove={onMouseMove}
       onMouseEnter={onMouseEnter}
