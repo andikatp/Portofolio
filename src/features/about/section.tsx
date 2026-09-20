@@ -139,58 +139,65 @@ function AboutSection({ isOpen, onClose }: AboutProps) {
 
             <div
               ref={scrollContainerRef}
-              className="flex-1 p-4 sm:p-6 md:p-8 overflow-x-hidden overflow-y-auto no-scrollbar"
+              className="flex-1 overflow-x-hidden overflow-y-auto no-scrollbar relative"
+              style={{
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+              }}
             >
-              <AnimatePresence mode="wait" custom={direction}>
+              <div className="relative min-h-full flex flex-col justify-between">
+                <div className="relative z-10 bg-white p-4 sm:p-6 md:p-8 min-h-full flex-1 shadow-[0_4px_20px_rgba(0,0,0,0.03)] pb-10 border-b border-slate-100">
+                  <AnimatePresence mode="wait" custom={direction}>
+                    <motion.div
+                      key={activeTab}
+                      custom={direction}
+                      variants={tabVariants}
+                      initial="initial"
+                      animate="enter"
+                      exit="exit"
+                      onAnimationStart={(variant) => {
+                        if (variant === "enter" && scrollContainerRef.current) {
+                          scrollContainerRef.current.scrollTop = 0;
+                        }
+                      }}
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      dragElastic={0.2}
+                      onDragEnd={(_e, { offset, velocity }) => {
+                        const swipeThreshold = 50;
+                        const velocityThreshold = 400;
+                        if (
+                          offset.x < -swipeThreshold ||
+                          velocity.x < -velocityThreshold
+                        ) {
+                          handleNextTab();
+                        } else if (
+                          offset.x > swipeThreshold ||
+                          velocity.x > velocityThreshold
+                        ) {
+                          handlePrevTab();
+                        }
+                      }}
+                      className="touch-pan-y cursor-grab min-h-full"
+                    >
+                      {activeTab === "about" && <AboutTab />}
+                      {activeTab === "experience" && <AboutExperience />}
+                      {activeTab === "cv" && <AboutCV customIndex={1} />}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
                 <motion.div
-                  key={activeTab}
-                  custom={direction}
-                  variants={tabVariants}
+                  custom={5}
+                  variants={contentVariants}
                   initial="initial"
                   animate="enter"
                   exit="exit"
-                  onAnimationStart={(variant) => {
-                    if (variant === "enter" && scrollContainerRef.current) {
-                      scrollContainerRef.current.scrollTop = 0;
-                    }
-                  }}
-                  drag="x"
-                  dragConstraints={{ left: 0, right: 0 }}
-                  dragElastic={0.2}
-                  onDragEnd={(_e, { offset, velocity }) => {
-                    const swipeThreshold = 50;
-                    const velocityThreshold = 400;
-                    if (
-                      offset.x < -swipeThreshold ||
-                      velocity.x < -velocityThreshold
-                    ) {
-                      handleNextTab();
-                    } else if (
-                      offset.x > swipeThreshold ||
-                      velocity.x > velocityThreshold
-                    ) {
-                      handlePrevTab();
-                    }
-                  }}
-                  className="touch-pan-y cursor-grab min-h-full"
+                  className="sticky bottom-0 z-0 px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-white border-t border-slate-100 shrink-0"
                 >
-                  {activeTab === "about" && <AboutTab />}
-                  {activeTab === "experience" && <AboutExperience />}
-                  {activeTab === "cv" && <AboutCV customIndex={1} />}
+                  <AboutAdditionals />
                 </motion.div>
-              </AnimatePresence>
+              </div>
             </div>
-
-            <motion.div
-              custom={5}
-              variants={contentVariants}
-              initial="initial"
-              animate="enter"
-              exit="exit"
-              className="z-10 px-4 sm:px-6 md:px-8 py-3 sm:py-4 bg-white border-t border-slate-100 shrink-0"
-            >
-              <AboutAdditionals />
-            </motion.div>
           </motion.div>
         </>
       )}
