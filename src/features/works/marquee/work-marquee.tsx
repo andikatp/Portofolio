@@ -271,7 +271,7 @@ export function WorkMarquee({
           {Array.from({ length: 8 }).map((_, i) => (
             <div
               key={`marquee-skeleton-${i}`}
-              className={`${CARD_SIZE_CLASSES} w-[220px] sm:w-[300px] md:w-[360px] lg:w-[420px] xl:w-[440px] bg-slate-200/80 dark:bg-slate-800/80 rounded-2xl shrink-0 animate-pulse flex items-center justify-center`}
+              className={`${CARD_SIZE_CLASSES} w-[220px] sm:w-[200px] md:w-[200px] lg:w-[200px] xl:w-[200px] bg-slate-200/80 dark:bg-slate-800/80 rounded-2xl shrink-0 animate-pulse flex items-center justify-center`}
             >
               <div className="w-8 h-8 border-2 border-slate-300 border-t-slate-600 rounded-full animate-spin" />
             </div>
@@ -283,7 +283,11 @@ export function WorkMarquee({
 
   return (
     <div
-      className="w-full overflow-hidden my-auto py-4 relative touch-pan-y"
+      className={`w-full my-auto py-4 relative touch-pan-y ${
+        selectedLayoutId || isPausedProp
+          ? "overflow-visible"
+          : "overflow-x-clip"
+      }`}
       onMouseMove={onMouseMove}
       onMouseEnter={onMouseEnter}
       onMouseLeave={() => {
