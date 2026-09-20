@@ -3,9 +3,13 @@ import { useEffect, useState } from "react";
 
 interface PreloaderProps {
   onComplete?: () => void;
+  onExitStart?: () => void;
 }
 
-export default function Preloader({ onComplete }: PreloaderProps) {
+export default function Preloader({
+  onComplete,
+  onExitStart,
+}: PreloaderProps) {
   const [dimension, setDimension] = useState({ width: 0, height: 0 });
   const [phase, setPhase] = useState<"loading" | "waiting" | "exit">("loading");
 
@@ -41,13 +45,22 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
   useEffect(() => {
     if (phase === "exit") {
-      // Phase 3: Allow 2-keyframe curtain slide (1.15s) to complete before unmounting
-      const timer3 = setTimeout(() => {
+      // Trigger entrance trigger 380ms into exit slide when curtain top curve clears hero text area
+      const timerExitStart = setTimeout(() => {
+        if (onExitStart) onExitStart();
+      }, 380);
+
+      // Allow 2-keyframe curtain slide (1.15s) to complete before unmounting
+      const timerComplete = setTimeout(() => {
         if (onComplete) onComplete();
       }, 1180);
-      return () => clearTimeout(timer3);
+
+      return () => {
+        clearTimeout(timerExitStart);
+        clearTimeout(timerComplete);
+      };
     }
-  }, [phase, onComplete]);
+  }, [phase, onExitStart, onComplete]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";

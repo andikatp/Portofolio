@@ -17,14 +17,10 @@ export function AboutBackdrop({ onClose }: AboutBackdropProps) {
     rawX.set(e.clientX - 38);
     rawY.set(e.clientY - 38);
 
-    const isLeft =
-      typeof window !== "undefined" &&
-      window.innerWidth >= 768 &&
-      e.clientX > 0 &&
-      e.clientX < window.innerWidth / 2;
+    const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
 
-    if (isLeft !== showCloseCircle) {
-      setShowCloseCircle(isLeft);
+    if (isDesktop !== showCloseCircle) {
+      setShowCloseCircle(isDesktop);
     }
   };
 
@@ -41,12 +37,9 @@ export function AboutBackdrop({ onClose }: AboutBackdropProps) {
         onMouseEnter={(e) => {
           rawX.set(e.clientX - 38);
           rawY.set(e.clientY - 38);
-          const isLeft =
-            typeof window !== "undefined" &&
-            window.innerWidth >= 768 &&
-            e.clientX > 0 &&
-            e.clientX < window.innerWidth / 2;
-          setShowCloseCircle(isLeft);
+          const isDesktop =
+            typeof window !== "undefined" && window.innerWidth >= 768;
+          setShowCloseCircle(isDesktop);
         }}
         onMouseLeave={() => setShowCloseCircle(false)}
       />

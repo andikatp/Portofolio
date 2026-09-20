@@ -94,3 +94,52 @@ export const MARQUEE_CARD_VARIANTS: Variants = {
     filter: "grayscale(0%)",
   },
 };
+
+export const WORK_EASE = [0.16, 1, 0.3, 1] as const;
+
+/**
+ * Featured works header tagline variant
+ */
+export const workHeaderTaglineVariants: Variants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: WORK_EASE,
+    },
+  },
+};
+
+/**
+ * Featured works title container variant
+ */
+export const workHeaderContainerVariants: Variants = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.035,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+/**
+ * Individual title word variant for work header
+ */
+export const workHeaderWordVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: "100%",
+  },
+  visible: {
+    opacity: 1,
+    y: "0%",
+    transition: {
+      duration: 0.55,
+      ease: WORK_EASE,
+    },
+  },
+};

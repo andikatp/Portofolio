@@ -4,10 +4,12 @@ import { PageTransitionContext } from "./page-transition-context";
 
 interface PageTransitionProviderProps {
   children: ReactNode;
+  isLoading?: boolean;
 }
 
 export function PageTransitionProvider({
   children,
+  isLoading = false,
 }: PageTransitionProviderProps) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -75,6 +77,7 @@ export function PageTransitionProvider({
     <PageTransitionContext.Provider
       value={{
         isAnimating,
+        isLoading,
         phase,
         targetPath,
         navigateWithTransition,
@@ -84,3 +87,4 @@ export function PageTransitionProvider({
     </PageTransitionContext.Provider>
   );
 }
+

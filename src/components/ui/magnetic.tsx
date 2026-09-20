@@ -39,7 +39,7 @@ export function Magnetic({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ x, y, backfaceVisibility: "hidden" }}
-      className={`will-change-transform transform-gpu ${className}`}
+      className={`w-fit will-change-transform transform-gpu ${className}`}
     >
       {children}
     </motion.div>
@@ -47,4 +47,3 @@ export function Magnetic({
 }
 
 export default Magnetic;
-

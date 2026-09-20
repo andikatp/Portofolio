@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { getWorkBySlug } from "../../features/works/data/work-data";
+import { useWorks } from "../../features/works/hooks/use-works";
 
 const BASE_URL = "https://andikatp.my.id";
 
@@ -28,16 +30,39 @@ const ROUTE_SEO: Record<string, { title: string; description: string }> = {
 
 export const SEO = () => {
   const location = useLocation();
+  const { works } = useWorks();
 
   useEffect(() => {
     const path = location.pathname;
-    const config = ROUTE_SEO[path] || {
-      title: path.startsWith("/works/")
-        ? "Project Details — AndikaTp"
-        : "AndikaTp — Fullstack Developer",
-      description:
-        "Portfolio of Andika Tri Prasetya, a Fullstack Developer building high quality web applications.",
-    };
+    let config = ROUTE_SEO[path];
+
+    if (!config) {
+      if (path.startsWith("/works/")) {
+        const slug = path.replace(/^\/works\/?/, "");
+        const work = slug ? getWorkBySlug(slug, works) : undefined;
+
+        if (work) {
+          config = {
+            title: `${work.title} — AndikaTp`,
+            description:
+              work.description ||
+              "Portfolio of Andika Tri Prasetya, a Fullstack Developer building high quality web applications.",
+          };
+        } else {
+          config = {
+            title: "Project Details — AndikaTp",
+            description:
+              "Portfolio of Andika Tri Prasetya, a Fullstack Developer building high quality web applications.",
+          };
+        }
+      } else {
+        config = {
+          title: "AndikaTp — Fullstack Developer",
+          description:
+            "Portfolio of Andika Tri Prasetya, a Fullstack Developer building high quality web applications.",
+        };
+      }
+    }
 
     // Update Document Title
     document.title = config.title;
@@ -59,6 +84,19 @@ export const SEO = () => {
       ogDesc.setAttribute("content", config.description);
     }
 
+    // Update Twitter Title & Description
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twitterTitle) {
+      twitterTitle.setAttribute("content", config.title);
+    }
+
+    const twitterDesc = document.querySelector(
+      'meta[name="twitter:description"]',
+    );
+    if (twitterDesc) {
+      twitterDesc.setAttribute("content", config.description);
+    }
+
     // Update Canonical URL & OG URL
     const currentUrl = `${BASE_URL}${path}`;
     const canonical = document.querySelector('link[rel="canonical"]');
@@ -70,7 +108,7 @@ export const SEO = () => {
     if (ogUrl) {
       ogUrl.setAttribute("content", currentUrl);
     }
-  }, [location.pathname]);
+  }, [location.pathname, works]);
 
   return null;
 };

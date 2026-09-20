@@ -1,34 +1,68 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
 import Magnetic from "../../components/ui/magnetic";
-import { CONTAINER_VARIANTS, ITEM_VARIANTS } from "./animations/contact-animations";
-import { CONTACT_LINKS } from "./data/contact-data";
+import { usePageTransition } from "../../context";
 import { trackEvent } from "../../lib/analytics";
+import {
+  CONTACT_TAGLINE_VARIANTS,
+  CONTACT_TITLE_CONTAINER_VARIANTS,
+  CONTACT_TITLE_WORD_VARIANTS,
+  CONTAINER_VARIANTS,
+  ITEM_VARIANTS,
+} from "./animations/contact-animations";
+import { CONTACT_LINKS } from "./data/contact-data";
+
+const TITLE_TEXT = "Let's Work Together.";
 
 function ContactSection() {
+  const { phase, isLoading } = usePageTransition();
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  if (!isLoading && phase === "idle" && !hasAnimated) {
+    setHasAnimated(true);
+  }
+
+  const shouldAnimate = hasAnimated || (!isLoading && phase === "idle");
+  const animateState = shouldAnimate ? "visible" : "hidden";
+  const titleWords = TITLE_TEXT.split(" ");
+
   return (
     <section className="flex flex-col items-center justify-center flex-1 px-4 sm:px-8 md:px-16 w-full py-4 sm:py-12 my-auto gap-4 sm:gap-8 min-h-0 overflow-hidden">
       <motion.p
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        variants={CONTACT_TAGLINE_VARIANTS}
+        initial="hidden"
+        animate={animateState}
         className="uppercase text-xs sm:text-sm text-gray-400 tracking-wider font-semibold"
       >
         Contact
       </motion.p>
       <motion.h1
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.15 }}
+        variants={CONTACT_TITLE_CONTAINER_VARIANTS}
+        initial="hidden"
+        animate={animateState}
         className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-slate-900 tracking-tight text-center"
       >
-        Let's Work Together.
+        {titleWords.map((word, index) => (
+          <span
+            key={`${word}-${index}`}
+            className="inline-block overflow-hidden py-0.5 -my-0.5 mr-[0.25em] align-bottom"
+          >
+            <motion.span
+              variants={CONTACT_TITLE_WORD_VARIANTS}
+              className="inline-block"
+              style={{ willChange: "transform, opacity" }}
+            >
+              {word}
+            </motion.span>
+          </span>
+        ))}
       </motion.h1>
 
       <motion.div
         variants={CONTAINER_VARIANTS}
         initial="hidden"
-        animate="visible"
+        animate={animateState}
         className="mt-2 sm:mt-8 py-2 sm:py-4 items-center border-t border-slate-200 w-full sm:w-3/4 md:w-1/2 flex flex-col gap-y-3 sm:gap-y-6"
       >
         {CONTACT_LINKS.map((item) => (

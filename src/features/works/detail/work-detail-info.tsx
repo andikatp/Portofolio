@@ -44,7 +44,7 @@ export function WorkDetailInfo({
           {work.title}
         </h1>
       </div>
-      <p className="text-slate-600 leading-relaxed text-sm sm:text-base md:text-lg">
+      <p className="text-slate-600 text-justify text-sm sm:text-base md:text-lg">
         {work.description}
       </p>
 

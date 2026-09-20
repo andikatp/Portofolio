@@ -25,7 +25,10 @@ interface AboutProps {
 type TabType = "about" | "experience" | "cv";
 
 function AboutSection({ isOpen, onClose }: AboutProps) {
-  const [activeTab, setActiveTab] = useState<TabType>("about");
+  const [[activeTab, direction], setTab] = useState<[TabType, number]>([
+    "about",
+    0,
+  ]);
   const [windowHeight, setWindowHeight] = useState(
     typeof window !== "undefined" ? window.innerHeight : 800,
   );
@@ -52,6 +55,28 @@ function AboutSection({ isOpen, onClose }: AboutProps) {
     { id: "cv", label: "Download CV" },
   ] as const;
 
+  const handleTabChange = (newTab: TabType) => {
+    const currentIndex = tabs.findIndex((t) => t.id === activeTab);
+    const newIndex = tabs.findIndex((t) => t.id === newTab);
+    if (newIndex !== currentIndex) {
+      setTab([newTab, newIndex > currentIndex ? 1 : -1]);
+    }
+  };
+
+  const handleNextTab = () => {
+    const currentIndex = tabs.findIndex((t) => t.id === activeTab);
+    if (currentIndex < tabs.length - 1) {
+      setTab([tabs[currentIndex + 1].id, 1]);
+    }
+  };
+
+  const handlePrevTab = () => {
+    const currentIndex = tabs.findIndex((t) => t.id === activeTab);
+    if (currentIndex > 0) {
+      setTab([tabs[currentIndex - 1].id, -1]);
+    }
+  };
+
   return createPortal(
     <AnimatePresence mode="wait">
       {isOpen && (
@@ -74,7 +99,7 @@ function AboutSection({ isOpen, onClose }: AboutProps) {
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setActiveTab(tab.id as TabType)}
+                    onClick={() => handleTabChange(tab.id as TabType)}
                     className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-200 select-none cursor-pointer shrink-0 ${
                       isActive
                         ? "bg-slate-900 text-white shadow-sm"
@@ -87,57 +112,58 @@ function AboutSection({ isOpen, onClose }: AboutProps) {
               })}
             </div>
 
-            <div className="flex-1 p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 overflow-x-hidden overflow-y-auto no-scrollbar">
-              <AnimatePresence mode="wait">
-                {activeTab === "about" && (
-                  <motion.div
-                    key="tab-about"
-                    variants={tabVariants}
-                    initial="initial"
-                    animate="enter"
-                    exit="exit"
-                    className="space-y-6 sm:space-y-8"
-                  >
-                    <AboutIntro customIndex={1} />
-                    <AboutStory customIndex={2} />
+            <div className="flex-1 p-4 sm:p-6 md:p-8 overflow-x-hidden overflow-y-auto no-scrollbar">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={activeTab}
+                  custom={direction}
+                  variants={tabVariants}
+                  initial="initial"
+                  animate="enter"
+                  exit="exit"
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.2}
+                  onDragEnd={(_e, { offset, velocity }) => {
+                    const swipeThreshold = 50;
+                    const velocityThreshold = 400;
+                    if (
+                      offset.x < -swipeThreshold ||
+                      velocity.x < -velocityThreshold
+                    ) {
+                      handleNextTab();
+                    } else if (
+                      offset.x > swipeThreshold ||
+                      velocity.x > velocityThreshold
+                    ) {
+                      handlePrevTab();
+                    }
+                  }}
+                  className="touch-pan-y cursor-grab space-y-6 sm:space-y-8 min-h-full"
+                >
+                  {activeTab === "about" && (
+                    <>
+                      <AboutIntro customIndex={1} />
+                      <AboutStory customIndex={2} />
 
-                    <motion.div
-                      custom={3}
-                      variants={contentVariants}
-                      initial="initial"
-                      animate="enter"
-                      exit="exit"
-                    >
-                      <AboutSkillMatrix />
-                    </motion.div>
+                      <motion.div
+                        custom={3}
+                        variants={contentVariants}
+                        initial="initial"
+                        animate="enter"
+                        exit="exit"
+                      >
+                        <AboutSkillMatrix />
+                      </motion.div>
 
-                    <AboutSummary customIndex={4} />
-                  </motion.div>
-                )}
+                      <AboutSummary customIndex={4} />
+                    </>
+                  )}
 
-                {activeTab === "experience" && (
-                  <motion.div
-                    key="tab-experience"
-                    variants={tabVariants}
-                    initial="initial"
-                    animate="enter"
-                    exit="exit"
-                  >
-                    <AboutExperience />
-                  </motion.div>
-                )}
+                  {activeTab === "experience" && <AboutExperience />}
 
-                {activeTab === "cv" && (
-                  <motion.div
-                    key="tab-cv"
-                    variants={tabVariants}
-                    initial="initial"
-                    animate="enter"
-                    exit="exit"
-                  >
-                    <AboutCV customIndex={1} />
-                  </motion.div>
-                )}
+                  {activeTab === "cv" && <AboutCV customIndex={1} />}
+                </motion.div>
               </AnimatePresence>
             </div>
 

@@ -51,14 +51,20 @@ function AppRoutes() {
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isPreloaderExiting, setIsPreloaderExiting] = useState(false);
 
   return (
     <>
       <AnimatePresence mode="wait">
-        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+        {isLoading && (
+          <Preloader
+            onExitStart={() => setIsPreloaderExiting(true)}
+            onComplete={() => setIsLoading(false)}
+          />
+        )}
       </AnimatePresence>
 
-      <PageTransitionProvider>
+      <PageTransitionProvider isLoading={isLoading && !isPreloaderExiting}>
         <AppRoutes />
       </PageTransitionProvider>
     </>

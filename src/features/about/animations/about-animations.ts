@@ -39,17 +39,20 @@ export const backdropVariants: Variants = {
 };
 
 export const tabVariants: Variants = {
-  initial: { opacity: 0, y: 6 },
+  initial: (direction: number = 1) => ({
+    opacity: 0,
+    x: direction > 0 ? 40 : -40,
+  }),
   enter: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.2, ease: EASE },
+    x: 0,
+    transition: { duration: 0.25, ease: FAST_EASE },
   },
-  exit: {
+  exit: (direction: number = 1) => ({
     opacity: 0,
-    y: -4,
-    transition: { duration: 0.15, ease: EASE },
-  },
+    x: direction > 0 ? -40 : 40,
+    transition: { duration: 0.18, ease: FAST_EASE },
+  }),
 };
 
 export const contentVariants: Variants = {

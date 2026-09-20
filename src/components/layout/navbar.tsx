@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import meImg from "../../assets/me.webp";
@@ -34,45 +34,65 @@ function Navbar() {
     >
       {/* Left side: Logo or Back icon */}
       <div className="pointer-events-auto">
-        {isHome ? (
-          <Magnetic strength={0.9}>
-            <a
-              href="/"
-              onClick={(e) => handleNavClick(e, "/")}
-              className={`flex flex-row items-center space-x-2.5 sm:space-x-4 ${
-                isAnimating
-                  ? "cursor-default pointer-events-none"
-                  : "cursor-pointer"
-              }`}
+        <AnimatePresence mode="wait" initial={false}>
+          {isHome ? (
+            <motion.div
+              key="home"
+              initial={{ opacity: 0, scale: 0.85, y: -4, filter: "blur(4px)" }}
+              animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, scale: 0.85, y: 4, filter: "blur(4px)" }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              style={{ willChange: "opacity, transform, filter" }}
             >
-              <img
-                src={meImg}
-                alt="Andika's Profile"
-                height={24}
-                width={24}
-                className="object-cover rounded-full shrink-0 w-6 h-6 sm:w-7 sm:h-7"
-              />
-              <h4 className="text-sm font-medium select-none text-slate-900 sm:text-base">
-                andikatp.
-              </h4>
-            </a>
-          </Magnetic>
-        ) : (
-          <Magnetic strength={0.9}>
-            <a
-              href="/"
-              onClick={(e) => handleNavClick(e, "/")}
-              aria-label="Back to home"
-              className={`flex items-center justify-center text-white transition-all bg-black rounded-full shadow-md select-none w-10 h-10 sm:w-12 sm:h-12 ${
-                isAnimating
-                  ? "cursor-default pointer-events-none"
-                  : "cursor-pointer hover:scale-105 active:scale-95"
-              }`}
+              <Magnetic strength={0.9}>
+                <a
+                  href="/"
+                  onClick={(e) => handleNavClick(e, "/")}
+                  className={`flex flex-row items-center space-x-2.5 sm:space-x-4 py-2.5 ${
+                    isAnimating
+                      ? "cursor-default pointer-events-none"
+                      : "cursor-pointer"
+                  }`}
+                >
+                  <img
+                    src={meImg}
+                    alt="Andika's Profile"
+                    height={24}
+                    width={24}
+                    className="object-cover rounded-full shrink-0 w-6 h-6 sm:w-7 sm:h-7"
+                  />
+                  <h4 className="text-sm font-medium select-none text-slate-900 sm:text-base">
+                    andikatp.
+                  </h4>
+                </a>
+              </Magnetic>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="back"
+              initial={{ opacity: 0, scale: 0.85, y: -4, filter: "blur(4px)" }}
+              animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, scale: 0.85, y: 4, filter: "blur(4px)" }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              style={{ willChange: "opacity, transform, filter" }}
             >
-              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-            </a>
-          </Magnetic>
-        )}
+              <Magnetic strength={0.9}>
+                <a
+                  href="/"
+                  onClick={(e) => handleNavClick(e, "/")}
+                  aria-label="Back to home"
+                  className={`flex items-center justify-center text-white transition-all bg-black rounded-full shadow-md select-none w-10 h-10 sm:w-12 sm:h-12 ${
+                    isAnimating
+                      ? "cursor-default pointer-events-none"
+                      : "cursor-pointer hover:scale-105 active:scale-95"
+                  }`}
+                >
+                  <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                </a>
+              </Magnetic>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Navigation Links */}
