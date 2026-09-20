@@ -31,9 +31,7 @@ export function WorkDetailViewer({
   onPrevImage,
   onNextImage,
 }: WorkDetailViewerProps) {
-  // Only apply layoutId flight during initial modal opening (!isContentReady) or closing (isClosing)
-  const shouldApplyLayoutId = !isContentReady || isClosing;
-  const currentLayoutId = shouldApplyLayoutId ? activeLayoutId : undefined;
+  const currentLayoutId = currentImageIndex === 0 ? activeLayoutId : undefined;
 
   const imageTransition: Transition = isClosing
     ? HERO_TRANSITION

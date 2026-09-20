@@ -137,7 +137,7 @@ function MarqueeCard({
             setHasError(true);
             setIsLoaded(true);
           }}
-          className={`${CARD_SIZE_CLASSES} w-auto object-contain rounded-2xl pointer-events-none transition-opacity duration-300 ${
+          className={`${CARD_SIZE_CLASSES} w-auto object-contain rounded-2xl pointer-events-none ${
             isLoaded ? "opacity-100 block" : "opacity-0 absolute inset-0"
           }`}
         />
