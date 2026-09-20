@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
+import appstore from "../../../../assets/marketplaces/appstore.webp";
+import playstore from "../../../../assets/marketplaces/playstore.webp";
 import Magnetic from "../../../../components/ui/magnetic";
+import { trackEvent } from "../../../../lib/analytics";
 import { PROJECT_INFO_VARIANTS } from "../../animations/work-animations";
 import type { WorkItem } from "../../data/work-data";
 
@@ -19,6 +22,7 @@ export function WorkDetailInfo({
   const formattedTechstack = Array.isArray(work.techstacks)
     ? work.techstacks.join(" • ")
     : work.techstacks;
+  const hasStoreLinks = Boolean(work.playStoreUrl || work.appStoreUrl);
 
   return (
     <motion.div
@@ -65,17 +69,31 @@ export function WorkDetailInfo({
         </div>
       </div>
 
-      {(work.playStoreUrl || work.appStoreUrl) && (
-        <div className="pt-2 sm:pt-4 flex flex-wrap gap-3">
+      {hasStoreLinks && (
+        <div className="flex flex-wrap sm:flex-nowrap gap-2.5 sm:gap-3 pt-3 sm:pt-6">
           {work.playStoreUrl && (
             <Magnetic strength={0.4}>
               <a
                 href={work.playStoreUrl}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-colors cursor-pointer shadow-md hover:shadow-lg"
+                rel="noreferrer"
+                onClick={() =>
+                  trackEvent("click_store_link", {
+                    store: "Play Store",
+                    project: work.title,
+                    url: work.playStoreUrl,
+                  })
+                }
+                className="bg-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full hover:bg-slate-50 transition-colors duration-200 flex flex-row justify-center items-center gap-2 cursor-pointer border border-slate-200 text-xs sm:text-sm font-medium text-slate-800 flex-1 sm:flex-none shadow-sm hover:shadow"
               >
-                Google Play Store
+                <img
+                  src={playstore}
+                  alt="Play Store"
+                  height={20}
+                  width={20}
+                  className="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
+                />
+                <span>Play Store</span>
               </a>
             </Magnetic>
           )}
@@ -84,10 +102,24 @@ export function WorkDetailInfo({
               <a
                 href={work.appStoreUrl}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-colors cursor-pointer shadow-md hover:shadow-lg"
+                rel="noreferrer"
+                onClick={() =>
+                  trackEvent("click_store_link", {
+                    store: "App Store",
+                    project: work.title,
+                    url: work.appStoreUrl,
+                  })
+                }
+                className="bg-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-full hover:bg-slate-50 transition-colors duration-200 flex flex-row justify-center items-center gap-2 cursor-pointer border border-slate-200 text-xs sm:text-sm font-medium text-slate-800 flex-1 sm:flex-none shadow-sm hover:shadow"
               >
-                Apple App Store
+                <img
+                  src={appstore}
+                  alt="App Store"
+                  height={20}
+                  width={20}
+                  className="w-4 h-4 sm:w-5 sm:h-5 shrink-0"
+                />
+                <span>App Store</span>
               </a>
             </Magnetic>
           )}

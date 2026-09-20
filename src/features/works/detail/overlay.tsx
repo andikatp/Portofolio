@@ -32,7 +32,7 @@ export function WorkDetailOverlay({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3, ease: HERO_TRANSITION.ease }}
-          className="fixed inset-0 z-100 overflow-y-auto flex flex-col justify-between"
+          className="fixed inset-0 z-500 overflow-y-auto flex flex-col justify-between"
         >
           <motion.div
             key="overlay-backdrop"

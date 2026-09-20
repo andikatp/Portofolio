@@ -6,10 +6,7 @@ interface PreloaderProps {
   onExitStart?: () => void;
 }
 
-export default function Preloader({
-  onComplete,
-  onExitStart,
-}: PreloaderProps) {
+export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
   const [dimension, setDimension] = useState({ width: 0, height: 0 });
   const [phase, setPhase] = useState<"loading" | "waiting" | "exit">("loading");
 

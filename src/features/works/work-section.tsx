@@ -98,21 +98,19 @@ function WorkSection() {
 
   return (
     <LayoutGroup id="work-gallery">
-      <section className="flex flex-col justify-end w-full flex-1 gap-2">
+      <section className="flex flex-col w-full flex-1 min-h-0 gap-2">
         <WorkHeader />
-        <div className="mt-auto">
-          <WorkMarquee
-            works={works}
-            isLoading={isLoading}
-            onHoverWork={handleHoverWork}
-            onMouseMove={handleMouseMove}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            isPausedProp={isModalOpen || Boolean(selectedWork)}
-            selectedLayoutId={selectedLayoutId}
-            onSelectWork={handleSelectWork}
-          />
-        </div>
+        <WorkMarquee
+          works={works}
+          isLoading={isLoading}
+          onHoverWork={handleHoverWork}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          isPausedProp={isModalOpen || Boolean(selectedWork)}
+          selectedLayoutId={selectedLayoutId}
+          onSelectWork={handleSelectWork}
+        />
         <WorkInfoPanel hoveredWork={hoveredWork} />
         <WorkCursor
           isHovered={isHovered && Boolean(hoveredWork)}

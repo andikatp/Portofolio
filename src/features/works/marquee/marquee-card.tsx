@@ -80,9 +80,9 @@ export const MarqueeCard = React.memo(function MarqueeCard({
       whileHover="hover"
       animate={isSelected ? "selected" : isHoveredCard ? "hover" : "rest"}
       className={`shrink-0 cursor-pointer relative group rounded-2xl ${
-        isSelected ? "z-9999" : "z-10"
+        isSelected ? "z-30" : "z-10"
       }`}
-      style={{ zIndex: isSelected ? 9999 : 1 }}
+      style={{ zIndex: isSelected ? 30 : 1 }}
     >
       {/* Skeleton overlay shown while image is downloading */}
       {!isLoaded && !hasError && (

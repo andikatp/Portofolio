@@ -4,8 +4,8 @@ export const CARD_SIZE_CLASSES =
 
 export function MarqueeSkeleton() {
   return (
-    <div className="w-full overflow-hidden my-auto py-4 relative pointer-events-none select-none">
-      <div className="flex w-max shrink-0 items-center space-x-[18px] sm:space-x-[18px] py-4 sm:py-8">
+    <div className="w-full flex-1 min-h-0 flex flex-col justify-end overflow-hidden relative pointer-events-none select-none">
+      <div className="flex w-max shrink-0 items-end space-x-[18px] sm:space-x-[18px] py-2 sm:py-4">
         {Array.from({ length: 8 }).map((_, i) => (
           <div
             key={`marquee-skeleton-${i}`}
