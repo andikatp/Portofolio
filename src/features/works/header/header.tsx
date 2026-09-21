@@ -41,7 +41,7 @@ export function WorkHeader() {
         {words.map((word, index) => (
           <span
             key={`${word}-${index}`}
-            className="inline-block overflow-hidden py-0.5 -my-0.5 mr-[0.25em] align-bottom"
+            className="inline-block overflow-hidden py-1 -my-1 px-[0.04em] mx-[-0.04em] mr-[0.25em] align-bottom"
           >
             <motion.span
               variants={workHeaderWordVariants}

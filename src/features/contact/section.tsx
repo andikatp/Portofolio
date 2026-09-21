@@ -46,7 +46,7 @@ function ContactSection() {
         {titleWords.map((word, index) => (
           <span
             key={`${word}-${index}`}
-            className="inline-block overflow-hidden py-0.5 -my-0.5 mr-[0.25em] align-bottom"
+            className="inline-block overflow-hidden py-1.5 -my-1.5 px-[0.05em] mx-[-0.05em] mr-[0.25em] align-bottom"
           >
             <motion.span
               variants={CONTACT_TITLE_WORD_VARIANTS}

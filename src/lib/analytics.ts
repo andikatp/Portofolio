@@ -5,7 +5,9 @@ declare global {
   }
 }
 
-const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
+const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as
+  | string
+  | undefined;
 
 let isInitialized = false;
 
@@ -18,27 +20,14 @@ export const initGA = (): void => {
   if (!GA_MEASUREMENT_ID) {
     if (import.meta.env.DEV) {
       console.log(
-        "[Analytics] VITE_GA_MEASUREMENT_ID is not set. Analytics calls will be logged to console in dev mode."
+        "[Analytics] VITE_GA_MEASUREMENT_ID is not set. Analytics calls will be logged to console in dev mode.",
       );
     }
     isInitialized = true;
     return;
   }
 
-  // Prevent multiple script insertions
-  if (document.getElementById("ga-script")) {
-    isInitialized = true;
-    return;
-  }
-
-  // Insert Google Analytics gtag script
-  const script = document.createElement("script");
-  script.id = "ga-script";
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  document.head.appendChild(script);
-
-  // Initialize dataLayer and gtag function
+  // Initialize dataLayer and gtag function stub immediately
   window.dataLayer = window.dataLayer || [];
   window.gtag = function gtag() {
     // eslint-disable-next-line prefer-rest-params
@@ -50,6 +39,22 @@ export const initGA = (): void => {
     send_page_view: false, // We manually trigger page views on route changes
   });
 
+  // Defer script loading so it doesn't block critical path rendering / LCP
+  const loadScript = () => {
+    if (document.getElementById("ga-script")) return;
+    const script = document.createElement("script");
+    script.id = "ga-script";
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    document.head.appendChild(script);
+  };
+
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+    (window as any).requestIdleCallback(() => loadScript(), { timeout: 3000 });
+  } else {
+    setTimeout(loadScript, 2500);
+  }
+
   isInitialized = true;
 };
 
@@ -59,7 +64,9 @@ export const initGA = (): void => {
 export const trackPageView = (path: string, title?: string): void => {
   if (!GA_MEASUREMENT_ID) {
     if (import.meta.env.DEV) {
-      console.log(`[Analytics Dev] Page View: ${path} ${title ? `("${title}")` : ""}`);
+      console.log(
+        `[Analytics Dev] Page View: ${path} ${title ? `("${title}")` : ""}`,
+      );
     }
     return;
   }
@@ -78,7 +85,7 @@ export const trackPageView = (path: string, title?: string): void => {
  */
 export const trackEvent = (
   eventName: string,
-  params?: Record<string, unknown>
+  params?: Record<string, unknown>,
 ): void => {
   if (!GA_MEASUREMENT_ID) {
     if (import.meta.env.DEV) {
