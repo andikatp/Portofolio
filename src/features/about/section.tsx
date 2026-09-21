@@ -160,11 +160,19 @@ function AboutSection({ isOpen, onClose }: AboutProps) {
                         }
                       }}
                       drag="x"
+                      dragDirectionLock
                       dragConstraints={{ left: 0, right: 0 }}
                       dragElastic={0.2}
                       onDragEnd={(_e, { offset, velocity }) => {
                         const swipeThreshold = 50;
                         const velocityThreshold = 400;
+
+                        const isHorizontalSwipe =
+                          Math.abs(offset.x) > Math.abs(offset.y) * 1.5 &&
+                          Math.abs(velocity.x) >= Math.abs(velocity.y);
+
+                        if (!isHorizontalSwipe) return;
+
                         if (
                           offset.x < -swipeThreshold ||
                           velocity.x < -velocityThreshold
