@@ -77,6 +77,7 @@ export function WorkDetailInfo({
                 href={work.playStoreUrl}
                 target="_blank"
                 rel="noreferrer"
+                aria-label={`Get ${work.title} on Google Play Store`}
                 onClick={() =>
                   trackEvent("click_store_link", {
                     store: "Play Store",
@@ -103,6 +104,7 @@ export function WorkDetailInfo({
                 href={work.appStoreUrl}
                 target="_blank"
                 rel="noreferrer"
+                aria-label={`Get ${work.title} on Apple App Store`}
                 onClick={() =>
                   trackEvent("click_store_link", {
                     store: "App Store",

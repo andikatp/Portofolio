@@ -87,7 +87,7 @@ export const MarqueeCard = React.memo(function MarqueeCard({
       {/* Skeleton overlay shown while image is downloading */}
       {!isLoaded && !hasError && (
         <div
-          className={`${CARD_SIZE_CLASSES} w-[220px] sm:w-[300px] md:w-[360px] lg:w-[420px] xl:w-[440px] bg-slate-200/90 dark:bg-slate-800/90 rounded-2xl animate-pulse flex items-center justify-center relative overflow-hidden`}
+          className={`${CARD_SIZE_CLASSES} w-[90px] sm:w-[110px] md:w-[125px] lg:w-[142px] xl:w-[155px] bg-slate-200/90 dark:bg-slate-800/90 rounded-2xl animate-pulse flex items-center justify-center relative overflow-hidden`}
         >
           <div className="w-8 h-8 border-2 border-slate-300 border-t-slate-600 dark:border-slate-600 dark:border-t-slate-300 rounded-full animate-spin" />
         </div>
@@ -96,7 +96,7 @@ export const MarqueeCard = React.memo(function MarqueeCard({
       {/* Error fallback card */}
       {hasError && (
         <div
-          className={`${CARD_SIZE_CLASSES} w-[220px] sm:w-[300px] md:w-[360px] lg:w-[420px] bg-slate-200 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-slate-400 font-medium text-xs sm:text-sm p-4 text-center`}
+          className={`${CARD_SIZE_CLASSES} w-[90px] sm:w-[110px] md:w-[125px] lg:w-[142px] xl:w-[155px] bg-slate-200 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-slate-400 font-medium text-xs sm:text-sm p-4 text-center`}
         >
           {work.title}
         </div>
@@ -115,6 +115,8 @@ export const MarqueeCard = React.memo(function MarqueeCard({
           variants={MARQUEE_CARD_VARIANTS}
           src={work.image}
           alt={work.title}
+          loading="lazy"
+          decoding="async"
           onLoad={() => {
             setIsLoaded(true);
             if (onImageLoad) onImageLoad();

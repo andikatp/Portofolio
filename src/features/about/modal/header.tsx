@@ -22,6 +22,10 @@ export function AboutHeader({ onClose, customIndex = 0 }: AboutHeaderProps) {
         <img
           src={meImg}
           alt="Andika Tri Prasetya"
+          width={44}
+          height={44}
+          loading="lazy"
+          decoding="async"
           className="rounded-full h-11 w-11 object-cover ring-1 ring-slate-200"
         />
         <div>

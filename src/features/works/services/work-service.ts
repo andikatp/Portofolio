@@ -4,7 +4,12 @@ import { WORKS, type WorkItem } from "../data/work-data";
 function getAssetUrl(asset: any): string | null {
   if (!asset || !asset.fields || !asset.fields.file) return null;
   const url = asset.fields.file.url;
-  return url ? (url.startsWith("//") ? `https:${url}` : url) : null;
+  if (!url) return null;
+  const fullUrl = url.startsWith("//") ? `https:${url}` : url;
+  if (fullUrl.includes("images.ctfassets.net") && !fullUrl.includes("fm=")) {
+    return fullUrl.includes("?") ? `${fullUrl}&fm=webp&q=80` : `${fullUrl}?fm=webp&q=80`;
+  }
+  return fullUrl;
 }
 
 export async function fetchWorksFromContentful(): Promise<WorkItem[]> {

@@ -23,7 +23,6 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
   }, []);
 
   useEffect(() => {
-    // Phase 1: Show "Loading..." for 800ms
     const timer1 = setTimeout(() => {
       setPhase("waiting");
     }, 600);
@@ -32,7 +31,6 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
 
   useEffect(() => {
     if (phase === "waiting") {
-      // Phase 2: Show "Thank you for waiting" for 1000ms
       const timer2 = setTimeout(() => {
         setPhase("exit");
       }, 1000);
@@ -42,12 +40,9 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
 
   useEffect(() => {
     if (phase === "exit") {
-      // Trigger entrance trigger 380ms into exit slide when curtain top curve clears hero text area
       const timerExitStart = setTimeout(() => {
         if (onExitStart) onExitStart();
       }, 380);
-
-      // Allow 2-keyframe curtain slide (1.15s) to complete before unmounting
       const timerComplete = setTimeout(() => {
         if (onComplete) onComplete();
       }, 1180);
@@ -73,11 +68,11 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
     dimension.height ||
     (typeof window !== "undefined" ? window.innerHeight : 900);
 
-  // Deeper, more pronounced U-curve center depth
-  const curveHeight = Math.min(Math.max(Math.round(h * 0.45), 320), 500);
+  const rawArch = w < 640 ? Math.round(w * 0.12) : Math.round(w * 0.1);
+  const archHeight = Math.min(Math.max(rawArch, 40), 160);
 
   const initialPath = `M0 0 L${w} 0 L${w} ${h} Q${w / 2} ${h} 0 ${h} Z`;
-  const targetPath = `M0 0 L${w} 0 L${w} ${h} Q${w / 2} ${h + curveHeight} 0 ${h} Z`;
+  const targetPath = `M0 0 L${w} 0 L${w} ${h} Q${w / 2} ${h + archHeight * 1.5} 0 ${h} Z`;
 
   const EASE = [0.76, 0, 0.24, 1] as const;
 
@@ -85,15 +80,12 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
     <motion.div
       initial={{ y: 0 }}
       animate={
-        phase === "exit"
-          ? { y: `calc(-100% - ${curveHeight + 50}px)` }
-          : { y: 0 }
+        phase === "exit" ? { y: `calc(-100% - ${archHeight * 2}px)` } : { y: 0 }
       }
       transition={{ duration: 1.15, ease: EASE }}
       className="fixed inset-0 z-99999 pointer-events-none select-none transform-gpu"
     >
-      {/* SVG Background Path Curtain Overlay */}
-      <svg className="absolute top-0 left-0 w-full h-[calc(100%+550px)] fill-black stroke-none pointer-events-auto">
+      <svg className="absolute top-0 left-0 w-full h-[calc(100%+300px)] fill-black stroke-none pointer-events-auto">
         <motion.path
           initial={{ d: initialPath }}
           animate={phase === "exit" ? { d: targetPath } : { d: initialPath }}
@@ -102,7 +94,6 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
         />
       </svg>
 
-      {/* Content Layer (Centered Sleek Text) */}
       <AnimatePresence>
         {phase !== "exit" && (
           <motion.div

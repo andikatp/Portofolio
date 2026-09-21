@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="color-scheme" content="light" />
+
+    <!-- Preconnect & Resource Hints for Contentful CDN & Fonts -->
+    <link rel="preconnect" href="https://images.ctfassets.net" crossorigin />
+    <link rel="dns-prefetch" href="https://images.ctfassets.net" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <title>Andikatp — Flutter & Fullstack Developer</title>
     <meta
       name="description"
@@ -100,6 +105,18 @@
     <link href="/src/index.css" rel="stylesheet" />
   </head>
   <body>
+    <noscript>
+      <header style="padding:2rem; font-family:sans-serif; text-align:center;">
+        <h1>Andika Tri Prasetya — Flutter &amp; Fullstack Developer</h1>
+        <p>Portfolio of Andika Tri Prasetya building high-quality mobile and web applications.</p>
+        <nav aria-label="Main Navigation" style="margin-top:1rem;">
+          <a href="/" style="margin:0 10px;">Home</a>
+          <a href="/works" style="margin:0 10px;">Works</a>
+          <a href="/about" style="margin:0 10px;">About</a>
+          <a href="/contact" style="margin:0 10px;">Contact</a>
+        </nav>
+      </header>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

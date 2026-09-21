@@ -48,6 +48,7 @@ function Navbar() {
                 <a
                   href="/"
                   onClick={(e) => handleNavClick(e, "/")}
+                  aria-label="Andikatp Homepage"
                   className={`flex flex-row items-center space-x-2.5 sm:space-x-4 py-2.5 ${
                     isAnimating
                       ? "cursor-default pointer-events-none"
@@ -57,8 +58,10 @@ function Navbar() {
                   <img
                     src={meImg}
                     alt="Andika's Profile"
-                    height={24}
-                    width={24}
+                    width={28}
+                    height={28}
+                    loading="eager"
+                    decoding="async"
                     className="object-cover rounded-full shrink-0 w-6 h-6 sm:w-7 sm:h-7"
                   />
                   <h4 className="text-sm font-medium select-none text-slate-900 sm:text-base">
@@ -106,6 +109,7 @@ function Navbar() {
               <a
                 href={menu.path}
                 onClick={(e) => handleNavClick(e, menu.path)}
+                aria-label={`Navigate to ${menu.label}`}
                 className={`font-medium text-xs sm:text-sm md:text-base rounded-full px-3 sm:px-4 py-1 sm:py-2 transition-colors duration-200 ease-in-out select-none block text-right ${
                   isAnimating
                     ? "cursor-default pointer-events-none"

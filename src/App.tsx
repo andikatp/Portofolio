@@ -1,17 +1,17 @@
 import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import MainLayout from "./components/layout/main-layout";
 import Preloader from "./components/ui/preloader";
 import { PageTransitionProvider } from "./context";
 
-import ContactPage from "./pages/contact-page";
-import HomePage from "./pages/home-page";
-import WorksPage from "./pages/works-page";
-
 import { GoogleAnalytics } from "./components/analytics/google-analytics";
 import { SEO } from "./components/seo/seo";
 import { AboutSection } from "./features/about";
+
+const HomePage = lazy(() => import("./pages/home-page"));
+const WorksPage = lazy(() => import("./pages/works-page"));
+const ContactPage = lazy(() => import("./pages/contact-page"));
 
 function AppRoutes() {
   const location = useLocation();
@@ -35,15 +35,17 @@ function AppRoutes() {
     <>
       <SEO />
       <GoogleAnalytics />
-      <Routes location={currentRouteLocation}>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<HomePage />} />
-          <Route path="/works" element={<WorksPage />} />
-          <Route path="/works/:slug" element={<WorksPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes location={currentRouteLocation}>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<HomePage />} />
+            <Route path="/works" element={<WorksPage />} />
+            <Route path="/works/:slug" element={<WorksPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
       <AboutSection isOpen={isAboutOpen} onClose={handleCloseAbout} />
     </>
   );
