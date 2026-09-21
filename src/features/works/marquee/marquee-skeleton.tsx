@@ -1,5 +1,5 @@
 export const CARD_SIZE_CLASSES =
-  "h-[30vh] min-h-[180px] max-h-[280px] sm:h-[38vh] sm:min-h-[260px] sm:max-h-[340px] md:h-[370px] lg:h-[430px] xl:h-[450px]";
+  "h-[28vh] min-h-[160px] max-h-[240px] sm:h-[34vh] sm:min-h-[220px] sm:max-h-[300px] md:h-[36vh] md:min-h-[250px] md:max-h-[340px] lg:h-[40vh] lg:min-h-[280px] lg:max-h-[390px] xl:h-[43vh] xl:min-h-[300px] xl:max-h-[420px] short-marquee-card";
 
 export function MarqueeSkeleton() {
   return (
