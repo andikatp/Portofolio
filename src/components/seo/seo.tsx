@@ -3,28 +3,28 @@ import { useLocation } from "react-router-dom";
 import { getWorkBySlug } from "../../features/works/data/work-data";
 import { useWorks } from "../../features/works/hooks/use-works";
 
-const BASE_URL = "https://andikatp.my.id";
+const BASE_URL = import.meta.env.VITE_SITE_URL || "https://andikatp.dev";
 
 const ROUTE_SEO: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "AndikaTp — Flutter & Fullstack Developer",
+    title: "Andika Tri Prasetya (Andikatp) — Flutter & Fullstack Developer",
     description:
-      "Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer specializing in cross-platform mobile applications (Flutter, React Native) and modern web systems.",
+      "Portfolio of Andika Tri Prasetya (Andikatp), a Flutter & Fullstack Developer specializing in cross-platform mobile applications (Flutter, React Native) and modern web systems.",
   },
   "/works": {
-    title: "Works & Projects — AndikaTp",
+    title: "Works & Projects — Andika Tri Prasetya (Andikatp)",
     description:
-      "Explore selected Flutter & React Native mobile applications, fullstack web projects, and case studies built by Andika Tri Prasetya.",
+      "Explore selected Flutter & React Native mobile applications, fullstack web projects, and case studies built by Andika Tri Prasetya (Andikatp).",
   },
   "/about": {
-    title: "About Me — AndikaTp",
+    title: "About Me — Andika Tri Prasetya (Andikatp)",
     description:
-      "Learn more about Andika Tri Prasetya, Flutter & Fullstack Developer background, technical skills, experiences, and qualifications.",
+      "Learn more about Andika Tri Prasetya (Andikatp), Flutter & Fullstack Developer background, technical skills, experiences, and qualifications.",
   },
   "/contact": {
-    title: "Contact & Get in Touch — AndikaTp",
+    title: "Contact & Get in Touch — Andika Tri Prasetya (Andikatp)",
     description:
-      "Connect with Andika Tri Prasetya for Flutter, mobile development, and fullstack software engineering opportunities.",
+      "Connect with Andika Tri Prasetya (Andikatp) for Flutter, mobile development, and fullstack software engineering opportunities.",
   },
 };
 
@@ -43,23 +43,23 @@ export const SEO = () => {
 
         if (work) {
           config = {
-            title: `${work.title} — AndikaTp`,
+            title: `${work.title} — Andika Tri Prasetya`,
             description:
               work.description ||
               "Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer building high quality mobile and web applications.",
           };
         } else {
           config = {
-            title: "Project Details — AndikaTp",
+            title: "Project Details — Andika Tri Prasetya",
             description:
               "Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer building high quality mobile and web applications.",
           };
         }
       } else {
         config = {
-          title: "AndikaTp — Flutter & Fullstack Developer",
+          title: "Andika Tri Prasetya (Andikatp) — Flutter & Fullstack Developer",
           description:
-            "Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer building high quality mobile and web applications.",
+            "Portfolio of Andika Tri Prasetya (Andikatp), a Flutter & Fullstack Developer building high quality mobile and web applications.",
         };
       }
     }

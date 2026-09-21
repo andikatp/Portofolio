@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffffff" />
@@ -9,52 +13,53 @@
 
     <!-- Resource Hints for Contentful CDN -->
     <link rel="dns-prefetch" href="https://images.ctfassets.net" />
-    <title>Andikatp — Flutter & Fullstack Developer</title>
+    <title>Andika Tri Prasetya (Andikatp) — Flutter & Fullstack Developer</title>
     <meta
       name="description"
-      content="Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer building high quality mobile and web applications with modern design and rich user experiences."
+      content="Portfolio of Andika Tri Prasetya (Andikatp), a Flutter & Fullstack Developer building high quality mobile and web applications with modern design and rich user experiences."
     />
     <meta
       name="keywords"
-      content="Andika Tri Prasetya, Andikatp, Flutter Developer, React Native Developer, Mobile Developer, Fullstack Developer, Software Engineer, React Developer, Web Developer, Portfolio"
+      content="Andika Tri Prasetya, Andikatp, andikatp, Flutter Developer, React Native Developer, Mobile Developer, Fullstack Developer, Software Engineer, React Developer, Web Developer, Portfolio"
     />
     <meta name="author" content="Andika Tri Prasetya" />
     <meta
       name="robots"
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
-    <link rel="canonical" href="https://andikatp.my.id/" />
+    <link rel="canonical" href="https://andikatp.dev/" />
+    <link rel="image_src" href="https://andikatp.dev/og-image.jpg" />
 
     <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://andikatp.my.id/" />
-    <meta property="og:title" content="Andikatp — Flutter & Fullstack Developer" />
+    <meta property="og:url" content="https://andikatp.dev/" />
+    <meta property="og:title" content="Andika Tri Prasetya (Andikatp) — Flutter & Fullstack Developer" />
     <meta
       property="og:description"
-      content="Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer building high quality mobile and web applications with modern design and rich user experiences."
+      content="Portfolio of Andika Tri Prasetya (Andikatp), a Flutter & Fullstack Developer building high quality mobile and web applications with modern design and rich user experiences."
     />
-    <meta property="og:image" content="https://andikatp.my.id/og-image.jpg" />
+    <meta property="og:image" content="https://andikatp.dev/og-image.jpg" />
     <meta
       property="og:image:secure_url"
-      content="https://andikatp.my.id/og-image.jpg"
+      content="https://andikatp.dev/og-image.jpg"
     />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="Andikatp — Flutter & Fullstack Developer Portfolio"
+      content="Andika Tri Prasetya (Andikatp) — Flutter & Fullstack Developer Portfolio"
     />
-    <meta property="og:site_name" content="Andikatp" />
+    <meta property="og:site_name" content="Andika Tri Prasetya (Andikatp)" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Andikatp — Flutter & Fullstack Developer" />
+    <meta name="twitter:title" content="Andika Tri Prasetya (Andikatp) — Flutter & Fullstack Developer" />
     <meta
       name="twitter:description"
-      content="Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer building high quality mobile and web applications with modern design and rich user experiences."
+      content="Portfolio of Andika Tri Prasetya (Andikatp), a Flutter & Fullstack Developer building high quality mobile and web applications with modern design and rich user experiences."
     />
-    <meta name="twitter:image" content="https://andikatp.my.id/og-image.jpg" />
+    <meta name="twitter:image" content="https://andikatp.dev/og-image.jpg" />
 
     <!-- Structured Data (JSON-LD) for Search Engine Optimization -->
     <script type="application/ld+json">
@@ -63,11 +68,17 @@
         "@graph": [
           {
             "@type": "Person",
-            "@id": "https://andikatp.my.id/#person",
+            "@id": "https://andikatp.dev/#person",
             "name": "Andika Tri Prasetya",
-            "alternateName": "Andikatp",
-            "url": "https://andikatp.my.id/",
-            "image": "https://andikatp.my.id/og-image.jpg",
+            "alternateName": ["Andikatp", "AndikaTp", "andikatp"],
+            "url": "https://andikatp.dev/",
+            "image": {
+              "@type": "ImageObject",
+              "url": "https://andikatp.dev/og-image.jpg",
+              "width": 1200,
+              "height": 630,
+              "caption": "Andika Tri Prasetya — Flutter & Fullstack Developer"
+            },
             "jobTitle": "Flutter & Fullstack Developer",
             "description": "Flutter & Fullstack Developer building high quality mobile and web applications with modern design and rich user experiences.",
             "knowsAbout": [
@@ -87,12 +98,13 @@
           },
           {
             "@type": "WebSite",
-            "@id": "https://andikatp.my.id/#website",
-            "url": "https://andikatp.my.id/",
-            "name": "Andikatp — Portfolio",
+            "@id": "https://andikatp.dev/#website",
+            "url": "https://andikatp.dev/",
+            "name": "Andika Tri Prasetya (Andikatp)",
+            "alternateName": ["Andikatp", "Andika Tri Prasetya", "Andikatp Portfolio"],
             "description": "Portfolio of Andika Tri Prasetya, a Flutter & Fullstack Developer building high quality mobile and web applications.",
             "publisher": {
-              "@id": "https://andikatp.my.id/#person"
+              "@id": "https://andikatp.dev/#person"
             },
             "inLanguage": "en-US"
           }

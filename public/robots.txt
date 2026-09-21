@@ -3,7 +3,8 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://andikatp.my.id
+Host: https://andikatp.dev
 
 # Sitemaps
-Sitemap: https://andikatp.my.id/sitemap.xml
+Sitemap: https://andikatp.dev/sitemap.xml
+

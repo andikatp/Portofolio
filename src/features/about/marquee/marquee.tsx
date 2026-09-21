@@ -9,6 +9,9 @@ const ITEMS = [
 ];
 
 export function AboutMarquee() {
+  // Multiply items to guarantee full screen coverage on any resolution (up to 4K+)
+  const REPEATED = [...ITEMS, ...ITEMS, ...ITEMS, ...ITEMS];
+
   return (
     <div className="relative w-full overflow-hidden bg-amber-400 text-slate-950 py-3 shadow-md select-none font-semibold text-sm sm:text-base tracking-wider">
       <motion.div
@@ -17,19 +20,19 @@ export function AboutMarquee() {
         transition={{
           repeat: Infinity,
           repeatType: "loop",
-          duration: 20,
+          duration: 35,
           ease: "linear",
         }}
       >
         {/* First set of items */}
-        {ITEMS.map((item, index) => (
+        {REPEATED.map((item, index) => (
           <React.Fragment key={`original-${index}`}>
             <span className="text-sm whitespace-nowrap">{item}</span>
             <span className="text-xl opacity-70">•</span>
           </React.Fragment>
         ))}
         {/* Duplicated set of items for seamless loop */}
-        {ITEMS.map((item, index) => (
+        {REPEATED.map((item, index) => (
           <React.Fragment key={`duplicate-${index}`}>
             <span className="text-sm whitespace-nowrap">{item}</span>
             <span className="text-xl opacity-70">•</span>
