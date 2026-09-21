@@ -11,7 +11,7 @@ export function AboutCurve({ windowHeight }: AboutCurveProps) {
   const curveVariants = getCurveVariants(initialPath, targetPath);
 
   return (
-    <svg className="hidden sm:block absolute top-0 left-[-99px] w-[100px] h-full fill-white stroke-none pointer-events-none">
+    <svg className="absolute top-0 left-[-99px] w-[100px] h-full fill-white stroke-none pointer-events-none">
       <motion.path
         variants={curveVariants}
         initial="initial"
