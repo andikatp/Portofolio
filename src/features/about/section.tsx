@@ -52,12 +52,11 @@ function AboutSection({ isOpen, onClose }: AboutProps) {
     }
   }
 
-  // Reset scroll container position to top whenever modal opens
   useEffect(() => {
     if (isOpen && scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop = 0;
     }
-  }, [isOpen]);
+  }, [activeTab, isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -154,11 +153,6 @@ function AboutSection({ isOpen, onClose }: AboutProps) {
                       initial="initial"
                       animate="enter"
                       exit="exit"
-                      onAnimationStart={(variant) => {
-                        if (variant === "enter" && scrollContainerRef.current) {
-                          scrollContainerRef.current.scrollTop = 0;
-                        }
-                      }}
                       drag="x"
                       dragDirectionLock
                       dragConstraints={{ left: 0, right: 0 }}
