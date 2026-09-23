@@ -38,7 +38,7 @@ export async function fetchWorksFromContentful(): Promise<WorkItem[]> {
     const fetchedWorks: WorkItem[] = response.items.map((item: any, index: number) => {
       const fields = item.fields || {};
       const thumbnailAsset = fields.thumbnail;
-      const mainImage = getAssetUrl(thumbnailAsset, { width: 500 }) || "";
+      const mainImage = getAssetUrl(thumbnailAsset, { width: 360 }) || "";
 
       let galleryImages: string[] = [];
       if (Array.isArray(fields.images)) {
