@@ -33,7 +33,7 @@ function ContactSection() {
         variants={CONTACT_TAGLINE_VARIANTS}
         initial="hidden"
         animate={animateState}
-        className="uppercase text-xs sm:text-sm text-gray-400 tracking-wider font-semibold"
+        className="uppercase text-xs sm:text-sm text-slate-500 tracking-wider font-semibold"
       >
         Contact
       </motion.p>

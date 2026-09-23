@@ -14,7 +14,7 @@ export function AboutExperience() {
         exit="exit"
         className="space-y-1"
       >
-        <p className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
+        <p className="text-xs font-semibold tracking-widest text-slate-500 uppercase">
           CAREER PATH
         </p>
         <h2 className="text-xl md:text-2xl font-semibold text-slate-900 tracking-tight">

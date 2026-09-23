@@ -38,7 +38,7 @@ export function WorkDetailInfo({
       className="flex-1 flex flex-col justify-center space-y-4 sm:space-y-6 max-w-xl py-2 sm:py-4 order-3 xl:order-1"
     >
       <div className="space-y-1">
-        <p className="text-xs sm:text-sm font-semibold text-slate-400 tracking-wider uppercase">
+        <p className="text-xs sm:text-sm font-semibold text-slate-500 tracking-wider uppercase">
           {work.id < 10 ? `0${work.id}` : work.id}
         </p>
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight">
@@ -52,7 +52,7 @@ export function WorkDetailInfo({
 
       <div className="grid grid-cols-2 gap-4 pt-2 sm:pt-4 border-t border-slate-200">
         <div>
-          <h4 className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
+          <h4 className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
             TECHSTACKS
           </h4>
           <p className="text-xs sm:text-sm font-semibold text-slate-800 uppercase tracking-wide">
@@ -60,7 +60,7 @@ export function WorkDetailInfo({
           </p>
         </div>
         <div>
-          <h4 className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
+          <h4 className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
             ROLE
           </h4>
           <p className="text-xs sm:text-sm font-semibold text-slate-800 uppercase tracking-wide">

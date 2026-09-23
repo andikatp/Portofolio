@@ -32,7 +32,7 @@ export function AboutHeader({ onClose, customIndex = 0 }: AboutHeaderProps) {
           <h3 className="font-medium text-slate-900 leading-tight text-base">
             Andika Tri Prasetya
           </h3>
-          <p className="text-xs text-slate-400 font-normal tracking-wide mt-0.5">
+          <p className="text-xs text-slate-500 font-normal tracking-wide mt-0.5">
             Flutter & Fullstack Developer
           </p>
         </div>

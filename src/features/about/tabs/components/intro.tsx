@@ -11,7 +11,7 @@ export function AboutIntro({ customIndex = 1 }: { customIndex?: number }) {
       exit="exit"
       className="space-y-3"
     >
-      <p className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
+      <p className="text-xs font-semibold tracking-widest text-slate-500 uppercase">
         ABOUT
       </p>
       <h2 className="text-2xl md:text-3xl font-medium text-slate-900 leading-snug tracking-tight">

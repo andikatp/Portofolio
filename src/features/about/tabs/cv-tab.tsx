@@ -30,7 +30,7 @@ export function AboutCV({ customIndex = 1 }: { customIndex?: number }) {
         exit="exit"
         className="space-y-1"
       >
-        <p className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
+        <p className="text-xs font-semibold tracking-widest text-slate-500 uppercase">
           CURRICULUM VITAE
         </p>
         <h2 className="text-xl md:text-2xl font-semibold text-slate-900 tracking-tight">
@@ -58,11 +58,11 @@ export function AboutCV({ customIndex = 1 }: { customIndex?: number }) {
 
         <div className="grid grid-cols-2 gap-3 text-xs">
           <div className="p-3 bg-white rounded-xl border border-slate-100 space-y-0.5">
-            <span className="text-slate-400 font-medium">Experiences</span>
+            <span className="text-slate-500 font-medium">Experiences</span>
             <p className="font-semibold text-slate-900">3+ Years</p>
           </div>
           <div className="p-3 bg-white rounded-xl border border-slate-100 space-y-0.5">
-            <span className="text-slate-400 font-medium">Core Stack</span>
+            <span className="text-slate-500 font-medium">Core Stack</span>
             <p className="font-semibold text-slate-900">Flutter / React</p>
           </div>
         </div>

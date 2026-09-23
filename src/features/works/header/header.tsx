@@ -28,7 +28,7 @@ export function WorkHeader() {
         variants={workHeaderTaglineVariants}
         initial="hidden"
         animate={animateState}
-        className="text-gray-400 text-xs sm:text-sm font-semibold tracking-wider uppercase"
+        className="text-slate-500 text-xs sm:text-sm font-semibold tracking-wider uppercase"
       >
         FEATURED WORKS
       </motion.p>

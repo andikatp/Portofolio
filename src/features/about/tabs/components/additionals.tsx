@@ -15,7 +15,7 @@ export function AboutAdditionals({
     <div className={`flex flex-row justify-between gap-3 sm:gap-8 md:gap-12 ${className}`}>
       {ABOUT_ADDITIONALS.map((item) => (
         <div key={item.title} className="w-1/3 min-w-0">
-          <p className={`${isDark ? "text-slate-400" : "text-gray-400"} text-[10px] sm:text-xs mb-1 font-semibold tracking-wider`}>
+          <p className={`${isDark ? "text-slate-400" : "text-slate-500"} text-[10px] sm:text-xs mb-1 font-semibold tracking-wider`}>
             {item.title}
           </p>
           <div className={`text-[10px] sm:text-xs font-medium ${isDark ? "text-slate-100" : "text-slate-800"} wrap-break-word`}>

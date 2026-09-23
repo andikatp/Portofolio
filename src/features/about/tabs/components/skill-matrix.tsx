@@ -3,7 +3,7 @@ import { SKILL_CATEGORIES } from "../../data/data";
 export function AboutSkillMatrix() {
   return (
     <div className="space-y-6 pt-6 border-t border-slate-200">
-      <p className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
+      <p className="text-xs font-semibold tracking-widest text-slate-500 uppercase">
         SKILLS & TECHNOLOGIES
       </p>
       <div className="space-y-5 text-sm">

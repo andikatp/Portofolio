@@ -18,7 +18,7 @@ export function WorkInfoPanel({ hoveredWork }: WorkInfoPanelProps) {
             transition={{ duration: 0.25, ease: "easeOut" }}
             className="flex flex-col space-y-0.5 sm:space-y-1"
           >
-            <p className="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase">
+            <p className="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-500 uppercase">
               {hoveredWork.category}
             </p>
             <p className="text-xl sm:text-2xl font-semibold text-slate-950 tracking-tight leading-snug sm:leading-none">

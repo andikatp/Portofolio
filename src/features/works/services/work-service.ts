@@ -1,13 +1,21 @@
 import { contentfulClient, isContentfulConfigured } from "../../../lib/contentful-client";
 import { WORKS, type WorkItem } from "../data/work-data";
 
-function getAssetUrl(asset: any): string | null {
+function getAssetUrl(asset: any, options?: { width?: number }): string | null {
   if (!asset || !asset.fields || !asset.fields.file) return null;
   const url = asset.fields.file.url;
   if (!url) return null;
   const fullUrl = url.startsWith("//") ? `https:${url}` : url;
-  if (fullUrl.includes("images.ctfassets.net") && !fullUrl.includes("fm=")) {
-    return fullUrl.includes("?") ? `${fullUrl}&fm=webp&q=80` : `${fullUrl}?fm=webp&q=80`;
+  if (fullUrl.includes("images.ctfassets.net")) {
+    const widthParam = options?.width ? `&w=${options.width}` : "";
+    if (!fullUrl.includes("fm=")) {
+      return fullUrl.includes("?")
+        ? `${fullUrl}&fm=webp&q=80${widthParam}`
+        : `${fullUrl}?fm=webp&q=80${widthParam}`;
+    }
+    if (options?.width && !fullUrl.includes("w=")) {
+      return `${fullUrl}&w=${options.width}`;
+    }
   }
   return fullUrl;
 }
@@ -30,12 +38,12 @@ export async function fetchWorksFromContentful(): Promise<WorkItem[]> {
     const fetchedWorks: WorkItem[] = response.items.map((item: any, index: number) => {
       const fields = item.fields || {};
       const thumbnailAsset = fields.thumbnail;
-      const mainImage = getAssetUrl(thumbnailAsset) || "";
+      const mainImage = getAssetUrl(thumbnailAsset, { width: 500 }) || "";
 
       let galleryImages: string[] = [];
       if (Array.isArray(fields.images)) {
         galleryImages = fields.images
-          .map(getAssetUrl)
+          .map((imgAsset: any) => getAssetUrl(imgAsset, { width: 1080 }))
           .filter((url: string | null): url is string => Boolean(url));
       }
 
