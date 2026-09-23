@@ -7,8 +7,8 @@ export interface ContactLink {
 export const CONTACT_LINKS: ContactLink[] = [
   {
     id: 1,
-    label: "Email",
-    link: "mailto:triprasetya.andika@gmail.com",
+    label: "hello@andikatp.dev",
+    link: "mailto:hello@andikatp.dev",
   },
   {
     id: 2,
