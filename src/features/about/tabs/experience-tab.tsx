@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Calendar, MapPin } from "lucide-react";
 import { contentVariants } from "../animations/animations";
 import { EXPERIENCE_DATA } from "../data/experience-data";

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import React, { useState } from "react";
 import { usePageTransition } from "../../context";
 import { useWorks } from "../works";

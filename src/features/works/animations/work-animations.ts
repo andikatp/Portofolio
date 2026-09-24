@@ -1,4 +1,4 @@
-import type { Transition, Variants } from "framer-motion";
+import type { Transition, Variants } from "motion/react";
 
 /**
  * Main hero layout flight transition curve (slower quintic ease)

@@ -1,4 +1,4 @@
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "motion/react";
 import { lazy, Suspense, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import MainLayout from "./components/layout/main-layout";

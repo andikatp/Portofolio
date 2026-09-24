@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import Magnetic from "../../components/ui/magnetic";

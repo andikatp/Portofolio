@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import appstore from "../../../../assets/marketplaces/appstore.webp";
 import playstore from "../../../../assets/marketplaces/playstore.webp";
 import Magnetic from "../../../../components/ui/magnetic";

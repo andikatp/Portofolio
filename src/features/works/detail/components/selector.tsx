@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { PROJECT_SELECTOR_VARIANTS } from "../../animations/work-animations";
 import {
   getSetIndexFromLayoutId,

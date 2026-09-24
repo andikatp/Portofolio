@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { contentVariants } from "../animations/animations";
 import { AboutIntro } from "./components/intro";
 import { AboutSkillMatrix } from "./components/skill-matrix";

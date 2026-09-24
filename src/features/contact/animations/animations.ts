@@ -1,4 +1,4 @@
-import type { Variants } from "framer-motion";
+import type { Variants } from "motion/react";
 
 export const CONTACT_EASE = [0.16, 1, 0.3, 1] as const;
 

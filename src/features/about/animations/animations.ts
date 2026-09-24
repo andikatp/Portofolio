@@ -1,4 +1,4 @@
-import type { Variants } from "framer-motion";
+import type { Variants } from "motion/react";
 
 export const EASE = [0.76, 0, 0.24, 1] as const;
 export const FAST_EASE = [0.16, 1, 0.3, 1] as const;

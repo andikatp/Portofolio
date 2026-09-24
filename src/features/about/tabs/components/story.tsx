@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { contentVariants } from "../../animations/animations";
 
 export function AboutStory({ customIndex = 2 }: { customIndex?: number }) {

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import React, { useState } from "react";
 import { getWorkSlug, type WorkItem } from "../../works";

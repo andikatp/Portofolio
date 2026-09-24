@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { GALLERY_SIDEBAR_VARIANTS } from "../../animations/work-animations";
 
 interface WorkDetailGalleryProps {

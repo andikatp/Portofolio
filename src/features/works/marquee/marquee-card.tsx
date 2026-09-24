@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -79,15 +79,15 @@ export const MarqueeCard = React.memo(function MarqueeCard({
       initial={false}
       whileHover="hover"
       animate={isSelected ? "selected" : isHoveredCard ? "hover" : "rest"}
-      className={`shrink-0 cursor-pointer relative group rounded-2xl ${
-        isSelected ? "z-30" : "z-10"
-      }`}
+      className={`shrink-0 cursor-pointer relative group rounded-2xl ${isSelected ? "z-30" : "z-10"
+        }`}
       style={{ zIndex: isSelected ? 30 : 1 }}
     >
       {/* Skeleton overlay shown while image is downloading */}
       {!isLoaded && !hasError && (
         <div
-          className={`${CARD_SIZE_CLASSES} w-[90px] sm:w-[110px] md:w-[125px] lg:w-[142px] xl:w-[155px] bg-slate-200/90 dark:bg-slate-800/90 rounded-2xl animate-pulse flex items-center justify-center relative overflow-hidden`}
+          className={`${CARD_SIZE_CLASSES} w-auto bg-slate-200/90 dark:bg-slate-800/90 rounded-2xl animate-pulse flex items-center justify-center relative overflow-hidden`}
+          style={{ aspectRatio: work.aspectRatio || 1.33 }}
         >
           <div className="w-8 h-8 border-2 border-slate-300 border-t-slate-600 dark:border-slate-600 dark:border-t-slate-300 rounded-full animate-spin" />
         </div>
@@ -96,7 +96,8 @@ export const MarqueeCard = React.memo(function MarqueeCard({
       {/* Error fallback card */}
       {hasError && (
         <div
-          className={`${CARD_SIZE_CLASSES} w-[90px] sm:w-[110px] md:w-[125px] lg:w-[142px] xl:w-[155px] bg-slate-200 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-slate-400 font-medium text-xs sm:text-sm p-4 text-center`}
+          className={`${CARD_SIZE_CLASSES} w-auto min-w-45 bg-slate-200 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-slate-400 font-medium text-xs sm:text-sm p-4 text-center`}
+          style={{ aspectRatio: work.aspectRatio || 1.33 }}
         >
           {work.title}
         </div>
@@ -125,9 +126,9 @@ export const MarqueeCard = React.memo(function MarqueeCard({
             setHasError(true);
             setIsLoaded(true);
           }}
-          className={`${CARD_SIZE_CLASSES} w-auto object-contain rounded-2xl pointer-events-none ${
-            isLoaded ? "opacity-100 block" : "opacity-0 absolute inset-0"
-          }`}
+          style={work.aspectRatio ? { aspectRatio: work.aspectRatio } : undefined}
+          className={`${CARD_SIZE_CLASSES} w-auto object-contain rounded-2xl pointer-events-none ${isLoaded ? "opacity-100 block" : "opacity-0 absolute inset-0"
+            }`}
         />
       )}
     </motion.div>

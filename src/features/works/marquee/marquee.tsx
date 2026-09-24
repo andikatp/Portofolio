@@ -1,4 +1,4 @@
-import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
+import { motion, useAnimationFrame, useMotionValue } from "motion/react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -7,7 +7,7 @@ import {
   type WorkItem,
 } from "../data/work-data";
 import { MarqueeCard } from "./marquee-card";
-import { MarqueeSkeleton } from "./marquee-skeleton";
+import { MarqueeSkeletonCard, SKELETON_WORKS } from "./marquee-skeleton";
 
 interface WorkMarqueeProps {
   works?: WorkItem[];
@@ -20,8 +20,6 @@ interface WorkMarqueeProps {
   isPausedProp?: boolean;
   selectedLayoutId?: string | null;
 }
-
-const SET_COUNT = 6;
 
 function wrap(min: number, max: number, v: number): number {
   const range = max - min;
@@ -55,20 +53,41 @@ export function WorkMarquee({
 
   const speed = 0.5;
 
-  let marqueeWorks: WorkItem[] = [];
-  if (works && works.length > 0) {
-    for (let i = 0; i < SET_COUNT; i++) {
-      marqueeWorks.push(...works);
-    }
-  } else if (DUPLICATED_WORKS.length > 0) {
-    marqueeWorks = DUPLICATED_WORKS;
+  const showSkeleton = isLoading || !works || works.length === 0;
+  const baseWorks: WorkItem[] = showSkeleton
+    ? SKELETON_WORKS
+    : works && works.length > 0
+      ? works
+      : DUPLICATED_WORKS.length > 0
+        ? DUPLICATED_WORKS
+        : SKELETON_WORKS;
+
+  const baseSetLength = baseWorks.length;
+  const setCount = Math.max(6, Math.ceil(24 / Math.max(1, baseSetLength)));
+
+  const marqueeWorks: WorkItem[] = [];
+  for (let i = 0; i < setCount; i++) {
+    marqueeWorks.push(...baseWorks);
   }
 
   const updateWidth = useCallback(() => {
-    if (containerRef.current && marqueeWorks.length > 0) {
-      singleWidthRef.current = containerRef.current.scrollWidth / SET_COUNT;
+    if (!containerRef.current || baseSetLength <= 0) return;
+    const children = containerRef.current.children;
+    if (children.length > baseSetLength) {
+      const firstCard = children[0] as HTMLElement;
+      const nextSetFirstCard = children[baseSetLength] as HTMLElement;
+      if (firstCard && nextSetFirstCard) {
+        const measuredWidth = nextSetFirstCard.offsetLeft - firstCard.offsetLeft;
+        if (measuredWidth > 0) {
+          singleWidthRef.current = measuredWidth;
+          return;
+        }
+      }
     }
-  }, [marqueeWorks.length]);
+    if (containerRef.current.scrollWidth > 0) {
+      singleWidthRef.current = containerRef.current.scrollWidth / setCount;
+    }
+  }, [baseSetLength, setCount]);
 
   useEffect(() => {
     updateWidth();
@@ -98,6 +117,7 @@ export function WorkMarquee({
   });
 
   const detectHoveredWorkFromPoint = (clientX: number, clientY: number) => {
+    if (showSkeleton) return;
     const elem = document.elementFromPoint(clientX, clientY);
     if (!elem) return;
     const cardElem = elem.closest("[data-work-index]");
@@ -147,17 +167,12 @@ export function WorkMarquee({
     setIsPaused(false);
   };
 
-  if (isLoading || marqueeWorks.length === 0) {
-    return <MarqueeSkeleton />;
-  }
-
   return (
     <div
-      className={`w-full flex-1 min-h-0 flex flex-col justify-end relative touch-pan-y ${
-        selectedLayoutId || isPausedProp
+      className={`w-full flex-1 min-h-0 flex flex-col justify-end relative touch-pan-y ${selectedLayoutId || isPausedProp
           ? "overflow-visible"
           : "overflow-x-clip"
-      }`}
+        }`}
       onMouseMove={onMouseMove}
       onMouseEnter={onMouseEnter}
       onMouseLeave={() => {
@@ -173,9 +188,18 @@ export function WorkMarquee({
       <motion.div
         ref={containerRef}
         style={{ x }}
-        className="flex w-max shrink-0 items-end space-x-[32px] sm:space-x-[32px] py-2 sm:py-4"
+        className="flex w-max shrink-0 items-end space-x-8 sm:space-x-8 py-2 sm:py-4"
       >
         {marqueeWorks.map((work, index) => {
+          if (showSkeleton) {
+            return (
+              <MarqueeSkeletonCard
+                key={`marquee-skel-${index}`}
+                aspectRatio={work.aspectRatio}
+              />
+            );
+          }
+
           const slug = getWorkSlug(work, works);
           const itemLayoutId = `hero-card-${work.id}-${index}`;
           const isSelected = selectedLayoutId === itemLayoutId;

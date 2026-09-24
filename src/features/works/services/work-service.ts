@@ -39,6 +39,11 @@ export async function fetchWorksFromContentful(): Promise<WorkItem[]> {
       const fields = item.fields || {};
       const thumbnailAsset = fields.thumbnail;
       const mainImage = getAssetUrl(thumbnailAsset, { width: 360 }) || "";
+      const imgDetails = thumbnailAsset?.fields?.file?.details?.image;
+      const aspectRatio =
+        imgDetails && imgDetails.width && imgDetails.height
+          ? imgDetails.width / imgDetails.height
+          : undefined;
 
       let galleryImages: string[] = [];
       if (Array.isArray(fields.images)) {
@@ -67,6 +72,7 @@ export async function fetchWorksFromContentful(): Promise<WorkItem[]> {
         playStoreUrl: fields.playStoreUrl || undefined,
         appStoreUrl: fields.appStoreUrl || undefined,
         order: itemOrder,
+        aspectRatio,
       };
     });
 

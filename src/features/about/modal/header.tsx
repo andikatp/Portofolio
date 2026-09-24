@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import meImg from "../../../assets/me.webp";
 import Magnetic from "../../../components/ui/magnetic";
 import { contentVariants } from "../animations/animations";

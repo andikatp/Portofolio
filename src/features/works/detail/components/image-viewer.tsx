@@ -1,4 +1,4 @@
-import { motion, type Transition } from "framer-motion";
+import { motion, type Transition } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   HERO_TRANSITION,

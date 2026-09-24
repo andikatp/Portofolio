@@ -13,6 +13,7 @@ export interface WorkItem {
   playStoreUrl?: string;
   appStoreUrl?: string;
   order?: number;
+  aspectRatio?: number;
 }
 
 export const WORKS: WorkItem[] = [];
