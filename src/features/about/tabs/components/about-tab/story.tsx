@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { contentVariants } from "../../animations/animations";
+import { contentVariants } from "../../../animations/animations";
 
 export function AboutStory({ customIndex = 2 }: { customIndex?: number }) {
   return (

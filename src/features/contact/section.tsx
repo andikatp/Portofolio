@@ -14,6 +14,7 @@ import {
 import { CONTACT_LINKS } from "./data/data";
 
 const TITLE_TEXT = "Let's Work Together.";
+const TITLE_WORDS = TITLE_TEXT.split(" ");
 
 function ContactSection() {
   const { phase, isLoading } = usePageTransition();
@@ -25,7 +26,6 @@ function ContactSection() {
 
   const shouldAnimate = hasAnimated || (!isLoading && phase === "idle");
   const animateState = shouldAnimate ? "visible" : "hidden";
-  const titleWords = TITLE_TEXT.split(" ");
 
   return (
     <section className="flex flex-col items-center justify-center flex-1 px-4 sm:px-8 md:px-16 w-full py-4 sm:py-8 my-auto gap-3 sm:gap-6 short-compact-gap min-h-0">
@@ -43,7 +43,7 @@ function ContactSection() {
         animate={animateState}
         className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl short-title-text font-semibold text-slate-900 tracking-tight text-center"
       >
-        {titleWords.map((word, index) => (
+        {TITLE_WORDS.map((word, index) => (
           <span
             key={`${word}-${index}`}
             className="inline-block overflow-hidden py-1.5 -my-1.5 px-[0.05em] mx-[-0.05em] mr-[0.25em] align-bottom"

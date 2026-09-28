@@ -39,15 +39,6 @@ importers:
         specifier: ^4.3.3
         version: 4.3.3
     devDependencies:
-      '@babel/core':
-        specifier: ^7.29.7
-        version: 7.29.7
-      '@rolldown/plugin-babel':
-        specifier: ^0.2.3
-        version: 0.2.4(@babel/core@7.29.7)(rolldown@1.2.8)(vite@8.3.0(@types/node@24.13.4)(jiti@2.7.0))
-      '@types/babel__core':
-        specifier: ^7.20.5
-        version: 7.20.5
       '@types/node':
         specifier: ^24.13.3
         version: 24.13.4
@@ -60,9 +51,6 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^6.1.1
         version: 6.1.1(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(rolldown@1.2.8)(vite@8.3.0(@types/node@24.13.4)(jiti@2.7.0)))(babel-plugin-react-compiler@1.0.0)(vite@8.3.0(@types/node@24.13.4)(jiti@2.7.0))
-      babel-plugin-react-compiler:
-        specifier: ^1.0.0
-        version: 1.0.0
       oxlint:
         specifier: ^1.81.0
         version: 1.82.0
@@ -688,18 +676,6 @@ packages:
     resolution: {integrity: sha512-yYU8cogLeSh/ms2jh8Fj7jaba/EWa7Ja6GoUqYZaraEuCI5YS6ms6ObZgjjedm+jm6XZjdNRWBpPP6Z86oOxcw==}
     peerDependencies:
       vite: ^5.2.0 || ^6 || ^7 || ^8
-
-  '@types/babel__core@7.20.5':
-    resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
-
-  '@types/babel__generator@7.27.0':
-    resolution: {integrity: sha512-ufFd2Xi92OAVPYsy+P4n7/U7e68fex0+Ee8gSG9KX7eo084CWiQ4sdxktvdl0bOPupXtVJPY19zk6EwWqUQ8lg==}
-
-  '@types/babel__template@7.4.4':
-    resolution: {integrity: sha512-h/NUaSyG5EyxBIp8YRxo4RMe2/qQgvyowRwVMzhYhBCONbW8PUsg4lkFMrhgZhUe5z3L3MiLDuvyJ/CaPa2A8A==}
-
-  '@types/babel__traverse@7.28.0':
-    resolution: {integrity: sha512-8PvcXf70gTDZBgt9ptxJ8elBeBjcLOAcOtoO/mPJjtji1+CdGbHgm77om1GrsPxsiE+uXIpNSK64UYaIwQXd4Q==}
 
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
@@ -1392,8 +1368,10 @@ snapshots:
       '@babel/helper-validator-identifier': 7.29.7
       js-tokens: 4.0.0
       picocolors: 1.1.1
+    optional: true
 
-  '@babel/compat-data@7.29.7': {}
+  '@babel/compat-data@7.29.7':
+    optional: true
 
   '@babel/core@7.29.7':
     dependencies:
@@ -1414,6 +1392,7 @@ snapshots:
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   '@babel/generator@7.29.8':
     dependencies:
@@ -1422,6 +1401,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
       jsesc: 3.1.0
+    optional: true
 
   '@babel/helper-compilation-targets@7.29.7':
     dependencies:
@@ -1430,8 +1410,10 @@ snapshots:
       browserslist: 4.28.9
       lru-cache: 5.1.1
       semver: 6.3.1
+    optional: true
 
-  '@babel/helper-globals@7.29.7': {}
+  '@babel/helper-globals@7.29.7':
+    optional: true
 
   '@babel/helper-module-imports@7.29.7':
     dependencies:
@@ -1439,6 +1421,7 @@ snapshots:
       '@babel/types': 7.29.8
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   '@babel/helper-module-transforms@7.29.7(@babel/core@7.29.7)':
     dependencies:
@@ -1448,27 +1431,34 @@ snapshots:
       '@babel/traverse': 7.29.8
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
-  '@babel/helper-string-parser@7.29.7': {}
+  '@babel/helper-string-parser@7.29.7':
+    optional: true
 
-  '@babel/helper-validator-identifier@7.29.7': {}
+  '@babel/helper-validator-identifier@7.29.7':
+    optional: true
 
-  '@babel/helper-validator-option@7.29.7': {}
+  '@babel/helper-validator-option@7.29.7':
+    optional: true
 
   '@babel/helpers@7.29.7':
     dependencies:
       '@babel/template': 7.29.7
       '@babel/types': 7.29.8
+    optional: true
 
   '@babel/parser@7.29.8':
     dependencies:
       '@babel/types': 7.29.8
+    optional: true
 
   '@babel/template@7.29.7':
     dependencies:
       '@babel/code-frame': 7.29.7
       '@babel/parser': 7.29.8
       '@babel/types': 7.29.8
+    optional: true
 
   '@babel/traverse@7.29.8':
     dependencies:
@@ -1481,11 +1471,13 @@ snapshots:
       debug: 4.4.3
     transitivePeerDependencies:
       - supports-color
+    optional: true
 
   '@babel/types@7.29.8':
     dependencies:
       '@babel/helper-string-parser': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
+    optional: true
 
   '@contentful/content-source-maps@0.12.3':
     dependencies:
@@ -1737,6 +1729,7 @@ snapshots:
       rolldown: 1.2.8
     optionalDependencies:
       vite: 8.3.0(@types/node@24.13.4)(jiti@2.7.0)
+    optional: true
 
   '@rolldown/pluginutils@1.0.1': {}
 
@@ -1817,27 +1810,6 @@ snapshots:
       tailwindcss: 4.3.3
       vite: 8.3.0(@types/node@24.13.4)(jiti@2.7.0)
 
-  '@types/babel__core@7.20.5':
-    dependencies:
-      '@babel/parser': 7.29.8
-      '@babel/types': 7.29.8
-      '@types/babel__generator': 7.27.0
-      '@types/babel__template': 7.4.4
-      '@types/babel__traverse': 7.28.0
-
-  '@types/babel__generator@7.27.0':
-    dependencies:
-      '@babel/types': 7.29.8
-
-  '@types/babel__template@7.4.4':
-    dependencies:
-      '@babel/parser': 7.29.8
-      '@babel/types': 7.29.8
-
-  '@types/babel__traverse@7.28.0':
-    dependencies:
-      '@babel/types': 7.29.8
-
   '@types/estree@1.0.9': {}
 
   '@types/node@24.13.4':
@@ -1885,8 +1857,10 @@ snapshots:
   babel-plugin-react-compiler@1.0.0:
     dependencies:
       '@babel/types': 7.29.8
+    optional: true
 
-  baseline-browser-mapping@2.11.23: {}
+  baseline-browser-mapping@2.11.23:
+    optional: true
 
   browserslist@4.28.9:
     dependencies:
@@ -1895,6 +1869,7 @@ snapshots:
       electron-to-chromium: 1.5.427
       node-releases: 2.0.55
       update-browserslist-db: 1.3.3(browserslist@4.28.9)
+    optional: true
 
   call-bind-apply-helpers@1.0.2:
     dependencies:
@@ -1906,7 +1881,8 @@ snapshots:
       call-bind-apply-helpers: 1.0.2
       get-intrinsic: 1.3.0
 
-  caniuse-lite@1.0.30001810: {}
+  caniuse-lite@1.0.30001810:
+    optional: true
 
   combined-stream@1.0.8:
     dependencies:
@@ -1939,7 +1915,8 @@ snapshots:
       - debug
       - supports-color
 
-  convert-source-map@2.0.0: {}
+  convert-source-map@2.0.0:
+    optional: true
 
   cookie@1.1.1: {}
 
@@ -1959,7 +1936,8 @@ snapshots:
       es-errors: 1.3.0
       gopd: 1.2.0
 
-  electron-to-chromium@1.5.427: {}
+  electron-to-chromium@1.5.427:
+    optional: true
 
   enhanced-resolve@5.25.0:
     dependencies:
@@ -1981,7 +1959,8 @@ snapshots:
       has-tostringtag: 1.0.2
       hasown: 2.0.4
 
-  escalade@3.2.0: {}
+  escalade@3.2.0:
+    optional: true
 
   estree-walker@2.0.2: {}
 
@@ -2019,7 +1998,8 @@ snapshots:
 
   function-bind@1.1.2: {}
 
-  gensync@1.0.0-beta.2: {}
+  gensync@1.0.0-beta.2:
+    optional: true
 
   get-intrinsic@1.3.0:
     dependencies:
@@ -2064,9 +2044,11 @@ snapshots:
 
   jiti@2.7.0: {}
 
-  js-tokens@4.0.0: {}
+  js-tokens@4.0.0:
+    optional: true
 
-  jsesc@3.1.0: {}
+  jsesc@3.1.0:
+    optional: true
 
   json-pointer@0.6.2:
     dependencies:
@@ -2074,7 +2056,8 @@ snapshots:
 
   json-stringify-safe@5.0.1: {}
 
-  json5@2.2.3: {}
+  json5@2.2.3:
+    optional: true
 
   lightningcss-android-arm64@1.32.0:
     optional: true
@@ -2179,6 +2162,7 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+    optional: true
 
   lucide-react@1.45.0(react@19.3.0):
     dependencies:
@@ -2214,7 +2198,8 @@ snapshots:
 
   nanoid@3.3.19: {}
 
-  node-releases@2.0.55: {}
+  node-releases@2.0.55:
+    optional: true
 
   object-inspect@1.13.4: {}
 
@@ -2303,7 +2288,8 @@ snapshots:
 
   scheduler@0.28.0: {}
 
-  semver@6.3.1: {}
+  semver@6.3.1:
+    optional: true
 
   semver@7.8.5: {}
 
@@ -2407,6 +2393,7 @@ snapshots:
       browserslist: 4.28.9
       escalade: 3.2.0
       picocolors: 1.1.1
+    optional: true
 
   vite-imagetools@12.0.1(@types/node@24.13.4)(vite@8.3.0(@types/node@24.13.4)(jiti@2.7.0)):
     dependencies:
@@ -2434,4 +2421,5 @@ snapshots:
 
   webpack-virtual-modules@0.6.2: {}
 
-  yallist@3.1.1: {}
+  yallist@3.1.1:
+    optional: true

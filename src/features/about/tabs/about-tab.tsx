@@ -1,9 +1,9 @@
 import { motion } from "motion/react";
 import { contentVariants } from "../animations/animations";
-import { AboutIntro } from "./components/intro";
-import { AboutSkillMatrix } from "./components/skill-matrix";
-import { AboutStory } from "./components/story";
-import { AboutSummary } from "./components/summary";
+import { AboutIntro } from "./components/about-tab/intro";
+import { AboutSkillMatrix } from "./components/about-tab/skill-matrix";
+import { AboutStory } from "./components/about-tab/story";
+import { AboutSummary } from "./components/about-tab/summary";
 
 export function AboutTab() {
   return (

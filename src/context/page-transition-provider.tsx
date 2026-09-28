@@ -31,7 +31,6 @@ export function PageTransitionProvider({
     if (phase !== "idle") return;
     if (location.pathname === path) return;
 
-    // Bypass page transition for /about modal route
     if (path === "/about") {
       navigate("/about", { state: { backgroundLocation: location } });
       return;
@@ -43,22 +42,18 @@ export function PageTransitionProvider({
 
     clearAllTimeouts();
     setTargetPath(path);
-    // 1. Show dark modal backdrop over CURRENT page first
+
     setPhase("backdrop");
 
-    // 2. After 380ms backdrop hold, start the white semicircle arch slide UP
     const t1 = setTimeout(() => {
       setPhase("rising");
 
-      // 3. At 480ms into rising slide (~860ms total), when covered by white curtain, swap route!
       const t2 = setTimeout(() => {
         navigate(path);
         window.scrollTo(0, 0);
       }, 480);
       timeoutsRef.current.push(t2);
 
-      // 4. Complete rising slide at 850ms into rising (~1230ms total).
-      // Trigger exit phase by setting phase to "idle", but hold targetPath until AnimatePresence exit completes (~850ms exit)
       const t3 = setTimeout(() => {
         setPhase("idle");
         const t4 = setTimeout(() => {
@@ -87,4 +82,3 @@ export function PageTransitionProvider({
     </PageTransitionContext.Provider>
   );
 }
-

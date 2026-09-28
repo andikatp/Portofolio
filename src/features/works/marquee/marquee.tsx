@@ -7,7 +7,8 @@ import {
   type WorkItem,
 } from "../data/work-data";
 import { MarqueeCard } from "./marquee-card";
-import { MarqueeSkeletonCard, SKELETON_WORKS } from "./marquee-skeleton";
+import { SKELETON_WORKS } from "./marquee-constants";
+import { MarqueeSkeletonCard } from "./marquee-skeleton";
 
 interface WorkMarqueeProps {
   works?: WorkItem[];
@@ -65,10 +66,13 @@ export function WorkMarquee({
   const baseSetLength = baseWorks.length;
   const setCount = Math.max(6, Math.ceil(24 / Math.max(1, baseSetLength)));
 
-  const marqueeWorks: WorkItem[] = [];
-  for (let i = 0; i < setCount; i++) {
-    marqueeWorks.push(...baseWorks);
-  }
+  const marqueeWorks = React.useMemo(() => {
+    const list: WorkItem[] = [];
+    for (let i = 0; i < setCount; i++) {
+      list.push(...baseWorks);
+    }
+    return list;
+  }, [baseWorks, setCount]);
 
   const updateWidth = useCallback(() => {
     if (!containerRef.current || baseSetLength <= 0) return;
@@ -77,7 +81,8 @@ export function WorkMarquee({
       const firstCard = children[0] as HTMLElement;
       const nextSetFirstCard = children[baseSetLength] as HTMLElement;
       if (firstCard && nextSetFirstCard) {
-        const measuredWidth = nextSetFirstCard.offsetLeft - firstCard.offsetLeft;
+        const measuredWidth =
+          nextSetFirstCard.offsetLeft - firstCard.offsetLeft;
         if (measuredWidth > 0) {
           singleWidthRef.current = measuredWidth;
           return;
@@ -169,10 +174,7 @@ export function WorkMarquee({
 
   return (
     <div
-      className={`w-full flex-1 min-h-0 flex flex-col justify-end relative touch-pan-y ${selectedLayoutId || isPausedProp
-          ? "overflow-visible"
-          : "overflow-x-clip"
-        }`}
+      className="w-full flex-1 min-h-0 flex flex-col justify-end relative touch-pan-y overflow-x-clip"
       onMouseMove={onMouseMove}
       onMouseEnter={onMouseEnter}
       onMouseLeave={() => {

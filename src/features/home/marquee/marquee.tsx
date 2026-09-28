@@ -8,8 +8,7 @@ const ITEMS = [
   "Flutter & Fullstack Developer",
 ];
 
-export function AboutMarquee() {
-  // Multiply items to guarantee full screen coverage on any resolution (up to 4K+)
+export function HomeMarquee() {
   const REPEATED = [...ITEMS, ...ITEMS, ...ITEMS, ...ITEMS];
 
   return (
@@ -43,4 +42,4 @@ export function AboutMarquee() {
   );
 }
 
-export default AboutMarquee;
+export default HomeMarquee;

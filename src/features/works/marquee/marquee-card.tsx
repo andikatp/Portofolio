@@ -6,7 +6,7 @@ import {
   MARQUEE_CARD_VARIANTS,
 } from "../animations/work-animations";
 import type { WorkItem } from "../data/work-data";
-import { CARD_SIZE_CLASSES } from "./marquee-skeleton";
+import { CARD_SIZE_CLASSES } from "./marquee-constants";
 
 export interface MarqueeCardProps {
   work: WorkItem;
@@ -39,14 +39,7 @@ export const MarqueeCard = React.memo(function MarqueeCard({
   touchMovedRef,
   onImageLoad,
 }: MarqueeCardProps) {
-  const [isLoaded, setIsLoaded] = useState(() => {
-    if (typeof window !== "undefined") {
-      const img = new Image();
-      img.src = work.image;
-      return img.complete;
-    }
-    return false;
-  });
+  const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   return (
@@ -77,8 +70,6 @@ export const MarqueeCard = React.memo(function MarqueeCard({
         setIsPaused(false);
       }}
       initial={false}
-      whileHover="hover"
-      animate={isSelected ? "selected" : isHoveredCard ? "hover" : "rest"}
       className={`shrink-0 cursor-pointer relative group rounded-2xl ${isSelected ? "z-30" : "z-10"
         }`}
       style={{ zIndex: isSelected ? 30 : 1 }}
@@ -108,6 +99,7 @@ export const MarqueeCard = React.memo(function MarqueeCard({
         <motion.img
           layoutId={itemLayoutId}
           initial={false}
+          animate={isSelected ? "selected" : isHoveredCard ? "hover" : "rest"}
           transition={{
             layout: HERO_TRANSITION,
             duration: 0.25,
@@ -126,7 +118,10 @@ export const MarqueeCard = React.memo(function MarqueeCard({
             setHasError(true);
             setIsLoaded(true);
           }}
-          style={work.aspectRatio ? { aspectRatio: work.aspectRatio } : undefined}
+          style={{
+            transformOrigin: "bottom center",
+            ...(work.aspectRatio ? { aspectRatio: work.aspectRatio } : {}),
+          }}
           className={`${CARD_SIZE_CLASSES} w-auto object-contain rounded-2xl pointer-events-none ${isLoaded ? "opacity-100 block" : "opacity-0 absolute inset-0"
             }`}
         />

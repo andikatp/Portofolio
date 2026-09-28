@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
-import Magnetic from "../../../../components/ui/magnetic";
-import { ABOUT_ADDITIONALS } from "../../data/additionals-data";
+import Magnetic from "../../../../../components/ui/magnetic";
+import { ABOUT_ADDITIONALS } from "../../../data/additionals-data";
 
 interface AboutAdditionalsProps {
   className?: string;
@@ -51,4 +51,3 @@ export function AboutAdditionals({
 }
 
 export default AboutAdditionals;
-

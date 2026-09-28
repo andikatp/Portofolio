@@ -1,4 +1,4 @@
-import { SKILL_CATEGORIES } from "../../data/data";
+import { SKILL_CATEGORIES } from "../../../data/data";
 
 export function AboutSkillMatrix() {
   return (

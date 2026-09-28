@@ -8,7 +8,7 @@ interface PreloaderProps {
 
 export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
   const [dimension, setDimension] = useState({ width: 0, height: 0 });
-  const [phase, setPhase] = useState<"loading" | "waiting" | "exit">("loading");
+  const [phase, setPhase] = useState<"waiting" | "exit">("waiting");
 
   useEffect(() => {
     const updateDimension = () => {
@@ -23,20 +23,11 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
   }, []);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => {
-      setPhase("waiting");
-    }, 600);
-    return () => clearTimeout(timer1);
+    const timer = setTimeout(() => {
+      setPhase("exit");
+    }, 800);
+    return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    if (phase === "waiting") {
-      const timer2 = setTimeout(() => {
-        setPhase("exit");
-      }, 1000);
-      return () => clearTimeout(timer2);
-    }
-  }, [phase]);
 
   useEffect(() => {
     if (phase === "exit") {
@@ -97,42 +88,16 @@ export default function Preloader({ onComplete, onExitStart }: PreloaderProps) {
       <AnimatePresence>
         {phase !== "exit" && (
           <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.2 } }}
-            className="relative z-10 w-full h-full flex items-center justify-center text-white pointer-events-auto"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15, transition: { duration: 0.2 } }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-10 w-full h-full flex items-center justify-center text-white pointer-events-auto text-center"
             style={{ willChange: "opacity" }}
           >
-            <AnimatePresence mode="wait">
-              {phase === "loading" && (
-                <motion.div
-                  key="loading-text"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-center"
-                >
-                  <h1 className="text-lg sm:text-2xl md:text-2xl font-light tracking-wide text-white/90">
-                    Loading<span className="animate-pulse">...</span>
-                  </h1>
-                </motion.div>
-              )}
-
-              {phase === "waiting" && (
-                <motion.div
-                  key="thank-you-text"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-center"
-                >
-                  <h1 className="text-base sm:text-xl md:text-2xl font-light tracking-wide text-slate-200">
-                    Thank you for waiting
-                  </h1>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <h1 className="text-base sm:text-xl md:text-2xl font-light tracking-wide text-slate-200">
+              Thank you for waiting
+            </h1>
           </motion.div>
         )}
       </AnimatePresence>

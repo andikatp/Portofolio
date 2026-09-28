@@ -11,7 +11,7 @@ import { AboutCurve } from "./modal/curve";
 import { AboutHeader } from "./modal/header";
 
 import { AboutTab } from "./tabs/about-tab";
-import AboutAdditionals from "./tabs/components/additionals";
+import AboutAdditionals from "./tabs/components/shared/additionals";
 import { AboutCV } from "./tabs/cv-tab";
 import { AboutExperience } from "./tabs/experience-tab";
 
@@ -21,6 +21,12 @@ interface AboutProps {
 }
 
 type TabType = "about" | "experience" | "cv";
+
+const TABS = [
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "cv", label: "Download CV" },
+] as const;
 
 function AboutSection({ isOpen, onClose }: AboutProps) {
   const [[activeTab, direction], setTab] = useState<[TabType, number]>([
@@ -40,18 +46,6 @@ function AboutSection({ isOpen, onClose }: AboutProps) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
-
-  if (isOpen !== prevIsOpen) {
-    setPrevIsOpen(isOpen);
-    if (isOpen) {
-      setTab(["about", 0]);
-      setIsMenuEntered(false);
-    } else {
-      setIsMenuEntered(false);
-    }
-  }
-
   useEffect(() => {
     if (isOpen && scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop = 0;
@@ -68,31 +62,35 @@ function AboutSection({ isOpen, onClose }: AboutProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  const tabs = [
-    { id: "about", label: "About" },
-    { id: "experience", label: "Experience" },
-    { id: "cv", label: "Download CV" },
-  ] as const;
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+
+  if (isOpen !== prevIsOpen) {
+    setPrevIsOpen(isOpen);
+    setIsMenuEntered(false);
+    if (isOpen) {
+      setTab(["about", 0]);
+    }
+  }
 
   const handleTabChange = (newTab: TabType) => {
-    const currentIndex = tabs.findIndex((t) => t.id === activeTab);
-    const newIndex = tabs.findIndex((t) => t.id === newTab);
+    const currentIndex = TABS.findIndex((t) => t.id === activeTab);
+    const newIndex = TABS.findIndex((t) => t.id === newTab);
     if (newIndex !== currentIndex) {
       setTab([newTab, newIndex > currentIndex ? 1 : -1]);
     }
   };
 
   const handleNextTab = () => {
-    const currentIndex = tabs.findIndex((t) => t.id === activeTab);
-    if (currentIndex < tabs.length - 1) {
-      setTab([tabs[currentIndex + 1].id, 1]);
+    const currentIndex = TABS.findIndex((t) => t.id === activeTab);
+    if (currentIndex < TABS.length - 1) {
+      setTab([TABS[currentIndex + 1].id, 1]);
     }
   };
 
   const handlePrevTab = () => {
-    const currentIndex = tabs.findIndex((t) => t.id === activeTab);
+    const currentIndex = TABS.findIndex((t) => t.id === activeTab);
     if (currentIndex > 0) {
-      setTab([tabs[currentIndex - 1].id, -1]);
+      setTab([TABS[currentIndex - 1].id, -1]);
     }
   };
 
@@ -118,7 +116,7 @@ function AboutSection({ isOpen, onClose }: AboutProps) {
             <AboutHeader onClose={onClose} customIndex={0} />
 
             <div className="flex items-center px-4 sm:px-6 md:px-8 pt-3 sm:pt-4 pb-2 space-x-2 border-b border-slate-100 shrink-0 overflow-x-auto no-scrollbar">
-              {tabs.map((tab) => {
+              {TABS.map((tab) => {
                 const isActive = activeTab === tab.id;
                 return (
                   <button
