@@ -11,14 +11,14 @@ const HEADER_TEXT =
   "Selected projects in mobile development, web apps, and enterprise systems.";
 
 export function WorkHeader() {
-  const { phase, isLoading } = usePageTransition();
+  const { isLoading } = usePageTransition();
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  if (!isLoading && phase === "idle" && !hasAnimated) {
+  if (!isLoading && !hasAnimated) {
     setHasAnimated(true);
   }
 
-  const shouldAnimate = hasAnimated || (!isLoading && phase === "idle");
+  const shouldAnimate = hasAnimated || (!isLoading);
   const animateState = shouldAnimate ? "visible" : "hidden";
   const words = HEADER_TEXT.split(" ");
 

@@ -19,15 +19,15 @@ const SUBTITLE_WORDS = SUBTITLE_TEXT.split(" ");
 
 export function HomeSection() {
   const { works } = useWorks();
-  const { navigateWithTransition, isAnimating, phase, isLoading } =
+  const { navigateWithTransition, isAnimating, isLoading } =
     usePageTransition();
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  if (!isLoading && phase === "idle" && !hasAnimated) {
+  if (!isLoading && !hasAnimated) {
     setHasAnimated(true);
   }
 
-  const shouldAnimate = hasAnimated || (!isLoading && phase === "idle");
+  const shouldAnimate = hasAnimated || !isLoading;
   const animateState = shouldAnimate ? "visible" : "hidden";
 
   const handleNavClick = (e: React.MouseEvent, path: string) => {

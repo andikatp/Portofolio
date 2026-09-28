@@ -140,3 +140,29 @@ export const workHeaderWordVariants: Variants = {
     },
   },
 };
+
+/**
+ * Entry animation for the marquee container
+ */
+export const marqueeContainerVariants: Variants = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+export const marqueeItemEntryVariants: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: WORK_EASE,
+    },
+  },
+};

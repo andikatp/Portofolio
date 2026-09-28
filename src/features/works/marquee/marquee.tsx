@@ -6,6 +6,8 @@ import {
   getWorkSlug,
   type WorkItem,
 } from "../data/work-data";
+import { usePageTransition } from "../../../context";
+import { marqueeContainerVariants, marqueeItemEntryVariants } from "../animations/work-animations";
 import { MarqueeCard } from "./marquee-card";
 import { SKELETON_WORKS } from "./marquee-constants";
 import { MarqueeSkeletonCard } from "./marquee-skeleton";
@@ -42,6 +44,16 @@ export function WorkMarquee({
   const navigate = useNavigate();
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
+  
+  const { isLoading: transitionLoading } = usePageTransition();
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  if (!transitionLoading && !hasAnimated) {
+    setHasAnimated(true);
+  }
+
+  const shouldAnimate = hasAnimated || !transitionLoading;
+  const animateState = shouldAnimate ? "visible" : "hidden";
 
   const containerRef = useRef<HTMLDivElement>(null);
   const singleWidthRef = useRef<number>(0);
@@ -173,7 +185,10 @@ export function WorkMarquee({
   };
 
   return (
-    <div
+    <motion.div
+      variants={marqueeContainerVariants}
+      initial="hidden"
+      animate={animateState}
       className="w-full flex-1 min-h-0 flex flex-col justify-end relative touch-pan-y overflow-x-clip"
       onMouseMove={onMouseMove}
       onMouseEnter={onMouseEnter}
@@ -195,10 +210,11 @@ export function WorkMarquee({
         {marqueeWorks.map((work, index) => {
           if (showSkeleton) {
             return (
-              <MarqueeSkeletonCard
-                key={`marquee-skel-${index}`}
-                aspectRatio={work.aspectRatio}
-              />
+              <motion.div key={`marquee-skel-${index}`} variants={marqueeItemEntryVariants} className="shrink-0">
+                <MarqueeSkeletonCard
+                  aspectRatio={work.aspectRatio}
+                />
+              </motion.div>
             );
           }
 
@@ -208,25 +224,26 @@ export function WorkMarquee({
           const isHoveredCard = hoveredCardIndex === index;
 
           return (
-            <MarqueeCard
-              key={`marquee-item-${work.id}-${index}`}
-              work={work}
-              index={index}
-              itemLayoutId={itemLayoutId}
-              isSelected={isSelected}
-              isHoveredCard={isHoveredCard}
-              onSelectWork={onSelectWork}
-              onHoverWork={onHoverWork}
-              setHoveredCardIndex={setHoveredCardIndex}
-              setIsPaused={setIsPaused}
-              navigate={navigate}
-              slug={slug}
-              touchMovedRef={touchMovedRef}
-              onImageLoad={updateWidth}
-            />
+            <motion.div key={`marquee-item-wrap-${work.id}-${index}`} variants={marqueeItemEntryVariants} className="shrink-0">
+              <MarqueeCard
+                work={work}
+                index={index}
+                itemLayoutId={itemLayoutId}
+                isSelected={isSelected}
+                isHoveredCard={isHoveredCard}
+                onSelectWork={onSelectWork}
+                onHoverWork={onHoverWork}
+                setHoveredCardIndex={setHoveredCardIndex}
+                setIsPaused={setIsPaused}
+                navigate={navigate}
+                slug={slug}
+                touchMovedRef={touchMovedRef}
+                onImageLoad={updateWidth}
+              />
+            </motion.div>
           );
         })}
       </motion.div>
-    </div>
+    </motion.div>
   );
 }

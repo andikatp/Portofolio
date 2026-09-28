@@ -17,14 +17,14 @@ const TITLE_TEXT = "Let's Work Together.";
 const TITLE_WORDS = TITLE_TEXT.split(" ");
 
 function ContactSection() {
-  const { phase, isLoading } = usePageTransition();
+  const { isLoading } = usePageTransition();
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  if (!isLoading && phase === "idle" && !hasAnimated) {
+  if (!isLoading && !hasAnimated) {
     setHasAnimated(true);
   }
 
-  const shouldAnimate = hasAnimated || (!isLoading && phase === "idle");
+  const shouldAnimate = hasAnimated || (!isLoading);
   const animateState = shouldAnimate ? "visible" : "hidden";
 
   return (
