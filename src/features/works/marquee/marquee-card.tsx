@@ -20,7 +20,7 @@ export interface MarqueeCardProps {
   setIsPaused: (paused: boolean) => void;
   navigate: ReturnType<typeof useNavigate>;
   slug: string;
-  touchMovedRef: React.MutableRefObject<boolean>;
+  dragMovedRef: React.MutableRefObject<boolean>;
   onImageLoad?: () => void;
 }
 
@@ -36,7 +36,7 @@ export const MarqueeCard = React.memo(function MarqueeCard({
   setIsPaused,
   navigate,
   slug,
-  touchMovedRef,
+  dragMovedRef,
   onImageLoad,
 }: MarqueeCardProps) {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -47,10 +47,10 @@ export const MarqueeCard = React.memo(function MarqueeCard({
       key={`marquee-item-${work.id}-${index}`}
       data-work-index={index}
       onClick={(e) => {
-        if (touchMovedRef.current) {
+        if (dragMovedRef.current) {
           e.preventDefault();
           e.stopPropagation();
-          touchMovedRef.current = false;
+          dragMovedRef.current = false;
           return;
         }
         if (onSelectWork) {
