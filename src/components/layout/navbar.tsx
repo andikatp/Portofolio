@@ -15,9 +15,9 @@ function Navbar() {
   const isHome = currentPath === "/" || currentPath === "/about";
 
   const menus = [
-    { label: "Works", path: "/works" },
-    { label: "Contact", path: "/contact" },
     { label: "About", path: "/about" },
+    { label: "Works", path: "/works" },
+    { label: "Contact", path: "/contact" }
   ];
   const handleNavClick = (e: React.MouseEvent, path: string) => {
     e.preventDefault();
@@ -49,11 +49,10 @@ function Navbar() {
                   href="/"
                   onClick={(e) => handleNavClick(e, "/")}
                   aria-label="Andikatp Homepage"
-                  className={`flex flex-row items-center space-x-2.5 sm:space-x-4 py-2.5 ${
-                    isAnimating
-                      ? "cursor-default pointer-events-none"
-                      : "cursor-pointer"
-                  }`}
+                  className={`flex flex-row items-center space-x-2.5 sm:space-x-4 py-2.5 ${isAnimating
+                    ? "cursor-default pointer-events-none"
+                    : "cursor-pointer"
+                    }`}
                 >
                   <img
                     src={meImg}
@@ -84,11 +83,10 @@ function Navbar() {
                   href="/"
                   onClick={(e) => handleNavClick(e, "/")}
                   aria-label="Back to home"
-                  className={`flex items-center justify-center text-white transition-all bg-black rounded-full shadow-md select-none w-10 h-10 sm:w-12 sm:h-12 ${
-                    isAnimating
-                      ? "cursor-default pointer-events-none"
-                      : "cursor-pointer hover:scale-105 active:scale-95"
-                  }`}
+                  className={`flex items-center justify-center text-white transition-all bg-black rounded-full shadow-md select-none w-10 h-10 sm:w-12 sm:h-12 ${isAnimating
+                    ? "cursor-default pointer-events-none"
+                    : "cursor-pointer hover:scale-105 active:scale-95"
+                    }`}
                 >
                   <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </a>
@@ -110,15 +108,13 @@ function Navbar() {
                 href={menu.path}
                 onClick={(e) => handleNavClick(e, menu.path)}
                 aria-label={`Navigate to ${menu.label}`}
-                className={`font-medium text-xs sm:text-sm md:text-base rounded-full px-3 sm:px-4 py-1 sm:py-2 transition-colors duration-200 ease-in-out select-none block text-right ${
-                  isAnimating
-                    ? "cursor-default pointer-events-none"
-                    : "cursor-pointer"
-                } ${
-                  isActive
+                className={`font-medium text-xs sm:text-sm md:text-base rounded-full px-3 sm:px-4 py-1 sm:py-2 transition-colors duration-200 ease-in-out select-none block text-right ${isAnimating
+                  ? "cursor-default pointer-events-none"
+                  : "cursor-pointer"
+                  } ${isActive
                     ? "text-black font-semibold"
                     : "text-slate-600 hover:text-black"
-                }`}
+                  }`}
               >
                 {menu.label}
               </a>

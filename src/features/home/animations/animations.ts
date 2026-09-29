@@ -13,6 +13,20 @@ export const titleContainerVariants: Variants = {
   },
 };
 
+export const modalVariants: Variants = {
+  initial: { scale: 0, opacity: 0 },
+  enter: {
+    scale: 1,
+    opacity: 1,
+    transition: { duration: 0.4, ease: [0.32, 0, 0.67, 0] as const },
+  },
+  closed: {
+    scale: 0,
+    opacity: 0,
+    transition: { duration: 0.4, ease: [0.32, 0, 0.67, 0] as const },
+  },
+};
+
 export const titleWordVariants: Variants = {
   hidden: {
     opacity: 0,
