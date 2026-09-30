@@ -44,7 +44,7 @@ export function WorkMarquee({
   const navigate = useNavigate();
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
-  
+
   const { isLoading: transitionLoading } = usePageTransition();
   const [hasAnimated, setHasAnimated] = useState(false);
 
@@ -133,25 +133,60 @@ export function WorkMarquee({
     x.set(wrappedX);
   });
 
-  const detectHoveredWorkFromPoint = (clientX: number, clientY: number) => {
-    if (showSkeleton) return;
-    const elem = document.elementFromPoint(clientX, clientY);
-    if (!elem) return;
-    const cardElem = elem.closest("[data-work-index]");
-    if (cardElem) {
-      const idxStr = cardElem.getAttribute("data-work-index");
-      if (idxStr !== null) {
-        const idx = parseInt(idxStr, 10);
-        if (!isNaN(idx) && marqueeWorks[idx]) {
-          setHoveredCardIndex(idx);
-          onHoverWork(marqueeWorks[idx]);
-          setIsPaused(true);
+  const lastMousePosRef = useRef<{ clientX: number; clientY: number } | null>(null);
+
+  useEffect(() => {
+    const handleGlobalPointerMove = (e: PointerEvent) => {
+      lastMousePosRef.current = { clientX: e.clientX, clientY: e.clientY };
+    };
+    window.addEventListener("pointermove", handleGlobalPointerMove, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", handleGlobalPointerMove);
+    };
+  }, []);
+
+  const detectHoveredWorkFromPoint = useCallback(
+    (clientX: number, clientY: number) => {
+      if (showSkeleton) return;
+      const elem = document.elementFromPoint(clientX, clientY);
+      if (!elem) {
+        setHoveredCardIndex(null);
+        onHoverWork(null);
+        return;
+      }
+      const cardElem = elem.closest("[data-work-index]");
+      if (cardElem) {
+        const idxStr = cardElem.getAttribute("data-work-index");
+        if (idxStr !== null) {
+          const idx = parseInt(idxStr, 10);
+          if (!isNaN(idx) && marqueeWorks[idx]) {
+            setHoveredCardIndex(idx);
+            onHoverWork(marqueeWorks[idx]);
+            setIsPaused(true);
+            return;
+          }
         }
       }
+      setHoveredCardIndex(null);
+      onHoverWork(null);
+      if (!isDraggingRef.current) {
+        setIsPaused(false);
+      }
+    },
+    [showSkeleton, marqueeWorks, onHoverWork],
+  );
+
+  useEffect(() => {
+    if (!isPausedProp && lastMousePosRef.current) {
+      detectHoveredWorkFromPoint(
+        lastMousePosRef.current.clientX,
+        lastMousePosRef.current.clientY,
+      );
     }
-  };
+  }, [isPausedProp, detectHoveredWorkFromPoint]);
 
   const handleDragStart = (clientX: number, clientY: number) => {
+    lastMousePosRef.current = { clientX, clientY };
     isDraggingRef.current = true;
     dragMovedRef.current = false;
     dragStartXRef.current = clientX;
@@ -162,6 +197,7 @@ export function WorkMarquee({
 
   const handleDragMove = (clientX: number, clientY: number) => {
     if (!isDraggingRef.current) return;
+    lastMousePosRef.current = { clientX, clientY };
     const deltaX = clientX - dragStartXRef.current;
     if (Math.abs(deltaX) > 5) {
       dragMovedRef.current = true;
@@ -175,12 +211,22 @@ export function WorkMarquee({
     detectHoveredWorkFromPoint(clientX, clientY);
   };
 
-  const handleDragEnd = () => {
-    isDraggingRef.current = false;
-    setHoveredCardIndex(null);
-    onHoverWork(null);
-    setIsPaused(false);
-  };
+  const handleDragEnd = useCallback(
+    (clientX?: number, clientY?: number) => {
+      isDraggingRef.current = false;
+      const posX = typeof clientX === "number" ? clientX : lastMousePosRef.current?.clientX;
+      const posY = typeof clientY === "number" ? clientY : lastMousePosRef.current?.clientY;
+
+      if (typeof posX === "number" && typeof posY === "number") {
+        detectHoveredWorkFromPoint(posX, posY);
+      } else {
+        setHoveredCardIndex(null);
+        onHoverWork(null);
+        setIsPaused(false);
+      }
+    },
+    [detectHoveredWorkFromPoint, onHoverWork],
+  );
 
   const handleTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length === 1) {
@@ -198,19 +244,61 @@ export function WorkMarquee({
     handleDragEnd();
   };
 
+  useEffect(() => {
+    const element = containerRef.current;
+    if (!element) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (isPausedProp) return;
+
+      const delta = e.deltaY !== 0 ? e.deltaY : e.deltaX;
+      if (delta === 0) return;
+
+      const singleWidth = singleWidthRef.current;
+      if (singleWidth <= 0) return;
+
+      e.preventDefault();
+
+      const nextX = x.get() - delta * 0.8;
+      const wrappedX = wrap(-singleWidth, 0, nextX);
+      x.set(wrappedX);
+
+      lastMousePosRef.current = { clientX: e.clientX, clientY: e.clientY };
+      detectHoveredWorkFromPoint(e.clientX, e.clientY);
+    };
+
+    element.parentElement?.addEventListener("wheel", handleWheel, { passive: false });
+    return () => {
+      element.parentElement?.removeEventListener("wheel", handleWheel);
+    };
+  }, [isPausedProp, detectHoveredWorkFromPoint, x]);
+
   const handleMouseDown = (e: React.MouseEvent) => {
-    handleDragStart(e.clientX, e.clientY);
+    if (e.button === 0 || e.button === 1) {
+      if (e.button === 1) {
+        e.preventDefault();
+      }
+      lastMousePosRef.current = { clientX: e.clientX, clientY: e.clientY };
+      handleDragStart(e.clientX, e.clientY);
+    }
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    lastMousePosRef.current = { clientX: e.clientX, clientY: e.clientY };
     if (isDraggingRef.current) {
       handleDragMove(e.clientX, e.clientY);
+    } else {
+      detectHoveredWorkFromPoint(e.clientX, e.clientY);
     }
     onMouseMove(e);
   };
 
-  const handleMouseUp = () => {
-    handleDragEnd();
+  const handleMouseUp = (e?: React.MouseEvent) => {
+    if (e) {
+      handleDragEnd(e.clientX, e.clientY);
+    } else {
+      handleDragEnd();
+    }
   };
 
   return (
@@ -222,9 +310,13 @@ export function WorkMarquee({
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      onMouseEnter={onMouseEnter}
+      onMouseEnter={(e) => {
+        lastMousePosRef.current = { clientX: e.clientX, clientY: e.clientY };
+        onMouseEnter(e);
+        detectHoveredWorkFromPoint(e.clientX, e.clientY);
+      }}
       onMouseLeave={() => {
-        handleMouseUp();
+        handleDragEnd();
         onMouseLeave();
         setHoveredCardIndex(null);
         setIsPaused(false);
