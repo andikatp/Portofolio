@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - DevKit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --card-bg: rgba(22, 27, 38, 0.85);
+            --card-border: #1e2638;
+            --text-primary: #f0f4fc;
+            --text-secondary: #8c9ba5;
+            --cyan-bright: #00f2fe;
+            --cyan-glow: rgba(0, 242, 254, 0.15);
+            --amber-bright: #ffab00;
+            --accent-blue: #2563eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.65;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(37, 99, 235, 0.05) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .header {
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .app-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--cyan-glow);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--cyan-bright);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .effective-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--cyan-bright);
+            margin: 2rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: "//";
+            color: var(--amber-bright);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.98rem;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            padding-left: 0.5rem;
+        }
+
+        li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--cyan-bright);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: rgba(0, 242, 254, 0.04);
+            border-left: 4px solid var(--cyan-bright);
+            padding: 1.25rem;
+            border-radius: 4px 12px 12px 4px;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box p {
+            color: var(--text-primary);
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--amber-bright);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.88rem;
+        }
+
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        a {
+            color: var(--cyan-bright);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            .container {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="app-badge">DEVKIT • PRIVACY POLICY</div>
+            <h1>Privacy Policy</h1>
+            <div class="effective-date">Last Updated: September 9, 2026</div>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>TL;DR:</strong> DevKit is designed with a strict zero-data-collection architecture. All system setting toggles, Logcat diagnostic logs, and latency tests remain 100% local on your Android device. We do not collect, track, or share your personal data.</p>
+        </div>
+
+        <h2>Overview</h2>
+        <p>This Privacy Policy applies to the <strong>DevKit</strong> mobile application (package name: <code>com.andikatp.devkit</code>), developed independently by Andika. DevKit provides advanced developer options toggles, system setting controls, ADB shortcuts, logcat monitoring, and device diagnostics.</p>
+
+        <h2>Information Collection & Processing</h2>
+        <p>DevKit operates entirely locally on your device. We do not collect, aggregate, store on remote servers, or transmit any personal information to third parties.</p>
+
+        <ul>
+            <li><strong>System Settings & ADB Toggles:</strong> Features such as Developer Options, USB Debugging, Layout Bounds, Show Taps, Pointer Location, Stay Awake, GPU Profiling, and Font/Animation Scale read and modify local system settings via Android system APIs or local <code>WRITE_SECURE_SETTINGS</code> permissions. None of these settings are recorded outside your device.</li>
+            <li><strong>Logcat & Diagnostic Logs:</strong> Logcat log viewer streams system and application logs locally using <code>READ_LOGS</code> permissions. Logs are rendered exclusively in real-time in the app user interface and are never exported, logged to cloud servers, or transmitted off your device.</li>
+            <li><strong>Device Diagnostics & Ping Tests:</strong> Network latency and ICMP ping tests perform diagnostic queries directly between your device and the destination host (e.g., Google DNS <code>8.8.8.8</code>). No network metrics or telemetry are reported back to us.</li>
+        </ul>
+
+        <h2>Permissions Requested</h2>
+        <p>To provide developer utility tools, DevKit requests specific system permissions. All requested permissions are used exclusively to enable the advertised features:</p>
+        <ul>
+            <li><code>android.permission.WRITE_SECURE_SETTINGS</code>: Optional permission granted via ADB to allow direct, one-tap toggling of system developer settings without navigating system menus.</li>
+            <li><code>android.permission.READ_LOGS</code>: Allows reading system logcat output for real-time developer debugging.</li>
+            <li><code>android.permission.INTERNET</code> & <code>ACCESS_NETWORK_STATE</code>: Used for running diagnostic ICMP ping tests and interacting with Google Play Billing API for Pro licensing.</li>
+            <li><code>com.android.vending.BILLING</code>: Enables Google Play In-App Billing for DevKit Pro purchase verification.</li>
+        </ul>
+
+        <h2>In-App Purchases & Security</h2>
+        <p>DevKit offers optional DevKit Pro lifetime access via Google Play In-App Purchases (IAP). All financial transactions and payment processing are handled securely directly by <strong>Google Play Store</strong> under <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+        <p>DevKit does not store or process your credit card numbers, billing addresses, or payment credentials. Purchase status is cached securely on your device using encrypted key-value storage (<code>FlutterSecureStorage</code>) strictly to verify your Pro entitlement across app restarts.</p>
+
+        <h2>Third-Party Services</h2>
+        <p>The application relies solely on official Google Play Billing services for purchase management. DevKit does not integrate any third-party ad networks, telemetry trackers, or external analytics SDKs.</p>
+
+        <h2>Children's Privacy</h2>
+        <p>DevKit is an advanced utility tool intended for software developers and power users. We do not knowingly collect or solicit personal information from children under the age of 13.</p>
+
+        <h2>Changes to This Privacy Policy</h2>
+        <p>We may update our Privacy Policy from time to time. Any changes will be published directly on this page with an updated "Last Updated" date.</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions or feedback regarding this Privacy Policy or DevKit, please reach out via our support channel or developer contact on Google Play Store.</p>
+
+        <div class="footer">
+            <p>&copy; 2026 DevKit. Built for developers.</p>
+        </div>
+    </div>
+</body>
+</html>

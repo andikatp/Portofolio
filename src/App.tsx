@@ -12,6 +12,7 @@ import { AboutSection } from "./features/about";
 const HomePage = lazy(() => import("./pages/home-page"));
 const WorksPage = lazy(() => import("./pages/works-page"));
 const ContactPage = lazy(() => import("./pages/contact-page"));
+const NotFoundPage = lazy(() => import("./pages/not-found-page"));
 
 function AppRoutes() {
   const location = useLocation();
@@ -43,6 +44,7 @@ function AppRoutes() {
             <Route path="/works" element={<WorksPage />} />
             <Route path="/works/:slug" element={<WorksPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </Suspense>
