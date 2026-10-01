@@ -17,7 +17,7 @@ export const CONTACT_LINKS: ContactLink[] = [
   },
   {
     id: 3,
-    label: "GitHub",
+    label: "Github",
     link: "https://github.com/andikatp",
   },
 ];
