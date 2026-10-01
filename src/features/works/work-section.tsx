@@ -45,7 +45,10 @@ function WorkSection() {
 
   useEffect(() => {
     setGlobalModalOpen(isModalOpen);
-  }, [isModalOpen, setGlobalModalOpen]);
+    if (!isModalOpen && hoveredWork) {
+      setIsHovered(true);
+    }
+  }, [isModalOpen, setGlobalModalOpen, hoveredWork]);
 
   const handleExitComplete = useCallback(() => {
     setSelectedWorkState(null);
@@ -56,8 +59,11 @@ function WorkSection() {
     (e: React.MouseEvent) => {
       rawX.set(e.clientX - 64);
       rawY.set(e.clientY - 24);
+      if (!isHovered) {
+        setIsHovered(true);
+      }
     },
-    [rawX, rawY],
+    [rawX, rawY, isHovered],
   );
 
   const handleMouseEnter = useCallback(
@@ -76,6 +82,9 @@ function WorkSection() {
 
   const handleHoverWork = useCallback((work: WorkItem | null) => {
     setHoveredWork(work);
+    if (work) {
+      setIsHovered(true);
+    }
   }, []);
 
   const handleCloseModal = useCallback(() => {
