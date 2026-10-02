@@ -1,0 +1,6 @@
+# Security contact information for andikatp.dev
+# See https://securitytxt.org/ for specification
+
+Contact: mailto:hello@andikatp.dev
+Preferred-Languages: en, id
+Canonical: https://andikatp.dev/.well-known/security.txt

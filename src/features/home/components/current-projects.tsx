@@ -84,7 +84,7 @@ export function CurrentProjects({
 
         <motion.a
           href="/works"
-          aria-label="View all portfolio projects"
+          aria-label="More Works — View all portfolio projects"
           onClick={(e) => handleNavClick(e, "/works")}
           variants={projectItemVariants}
           custom={topProjects.length}

@@ -28,6 +28,9 @@ export default defineConfig({
           if (id.includes("node_modules")) {
             if (id.includes("motion")) return "motion";
             if (id.includes("lucide-react")) return "icons";
+            if (id.includes("contentful") || id.includes("axios"))
+              return "contentful";
+            if (id.includes("slugify")) return "contentful";
             if (
               id.includes("react") ||
               id.includes("react-dom") ||
