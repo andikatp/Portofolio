@@ -46,7 +46,7 @@ function WorkSection() {
   useEffect(() => {
     setGlobalModalOpen(isModalOpen);
     if (!isModalOpen && hoveredWork) {
-      setIsHovered(true);
+      requestAnimationFrame(() => setIsHovered(true));
     }
   }, [isModalOpen, setGlobalModalOpen, hoveredWork]);
 
